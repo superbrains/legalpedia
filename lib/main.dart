@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(
-                      labelText: 'EMAIL or USERNAME',
+                      labelText: 'REGISTERED USERNAME',
                       labelStyle:  TextStyle(
                         fontFamily: 'MontSerrat',
                         fontWeight: FontWeight.bold
@@ -69,29 +69,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(height: 20.0),
                   TextField(
                     decoration: InputDecoration(
-                        labelText: 'PASSWORD',
+                        labelText: 'REGISTERED EMAIL',
                         labelStyle:  TextStyle(
                             fontFamily: 'MontSerrat',
                             fontWeight: FontWeight.bold
                         )
                     ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 5.0),
-                Container(
-                  alignment: Alignment(1.0,0.0),
-                  padding: EdgeInsets.only(top:15.0, left: 20.0),
-                  child: InkWell(
-                    child: Text('Forgot Password',
-                    style: TextStyle(
-                      color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'MontSerrat',
-                    decoration: TextDecoration.underline)
-    ) ,
 
                   ),
-                ),
+
                   SizedBox(height: 40.0),
                   Container(
                     height: 40.0,
@@ -104,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: (){},
                         child: Center(
                           child: Text(
-                            'LOGIN',
+                            'REQUEST PASSWORD',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -131,10 +117,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                          children: <Widget>[
                            Center(
-                             child: IconButton(icon: new Icon(Icons.email), onPressed: null),
+                             child: IconButton(icon: new Icon(Icons.arrow_back), onPressed: null),
                            ),
                            Center(
-                             child: Text('Create An Account', style:  TextStyle(
+                             child: Text('Back', style:  TextStyle(
                               fontWeight:  FontWeight.bold,
                                  fontFamily: 'MontSerrat'
                              ),),
