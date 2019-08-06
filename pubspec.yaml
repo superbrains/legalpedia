@@ -46,11 +46,13 @@ flutter:
   - assets/LGPLogo.png
   - assets/articles.png
   - assets/dictionary.png
-  - assets/judgements.png
+  - assets/dictionay.png
+  - assets/latest-judgments.png
   - assets/latest.png
   - assets/laws.png
   - assets/search.png
   - assets/updates.png
+  - assets/forms.png
   - assets/articles.png
   - assets/foreign resources.png
   - assets/forms and precedence.png

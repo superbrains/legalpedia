@@ -2,6 +2,7 @@ import 'dart:ui' as prefix1;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:legalpedia/switchboard.dart';
 
 
 void main() => runApp(MyApp());
@@ -181,19 +182,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               SizedBox(height: 40.0,),
-              Stack(
-                children: <Widget>[
-                  Row(
-
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                    Container(
-
-                    )
-
-                    ],
-                  )
-                ],
+              Container(
+                height: MediaQuery.of(context).size.height - 150.0,
+                child: Column(
+                  children: <Widget>[
+                    new MySwitchboard()
+                  ],
+                ),
               )
             ],
           )
