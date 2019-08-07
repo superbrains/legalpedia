@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SubjectMatter extends StatefulWidget{
+class LatestJudgements extends StatefulWidget{
   @override
-  _SubjectMatter createState()=> _SubjectMatter();
+  _LatestJudgements createState()=> _LatestJudgements();
 
 }
 
-class _SubjectMatter extends State<SubjectMatter>{
+class _LatestJudgements extends State<LatestJudgements>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,7 +14,7 @@ class _SubjectMatter extends State<SubjectMatter>{
       appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
         elevation: 7.0,
         actionsIconTheme: new IconThemeData(color:  Colors.white),
-        title: Text('Subject Matter Index', style: TextStyle(
+        title: Text('Latest Judgements', style: TextStyle(
             fontWeight:  FontWeight.bold,
             fontSize: 16.0,
             fontFamily: 'Monseratti',
@@ -24,7 +24,7 @@ class _SubjectMatter extends State<SubjectMatter>{
         actions: <Widget>[
 
           new IconButton(icon: new Icon(Icons.refresh),onPressed: null,),
-
+          new IconButton(icon: new Icon(Icons.home),onPressed: null,),
         ],
         backgroundColor: Colors.red,
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SubjectMatter extends StatefulWidget{
+class Dictionary extends StatefulWidget{
   @override
-  _SubjectMatter createState()=> _SubjectMatter();
+  _Dictionary createState()=> _Dictionary();
 
 }
 
-class _SubjectMatter extends State<SubjectMatter>{
+class _Dictionary extends State<Dictionary>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,7 +14,7 @@ class _SubjectMatter extends State<SubjectMatter>{
       appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
         elevation: 7.0,
         actionsIconTheme: new IconThemeData(color:  Colors.white),
-        title: Text('Subject Matter Index', style: TextStyle(
+        title: Text('Law Dictionary', style: TextStyle(
             fontWeight:  FontWeight.bold,
             fontSize: 16.0,
             fontFamily: 'Monseratti',

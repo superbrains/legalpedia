@@ -3,7 +3,17 @@ import 'dart:ui' as prefix1;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:legalpedia/switchboard.dart';
-
+import 'package:legalpedia/judgements.dart';
+import 'package:legalpedia/subjectmatter.dart';
+import 'package:legalpedia/latestjudgements.dart';
+import 'package:legalpedia/lawsoffed.dart';
+import 'package:legalpedia/staterules.dart';
+import 'package:legalpedia/formsandprec.dart';
+import 'package:legalpedia/otherrules.dart';
+import 'package:legalpedia/legalarticles.dart';
+import 'package:legalpedia/dictionary.dart';
+import 'package:legalpedia/maxims.dart';
+import 'package:legalpedia/foreign.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +23,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LEGALPEDIA',
+      routes: <String, WidgetBuilder>{
+        'Judgment': (BuildContext context) => new Judgment(),
+        'SubjectMatter': (BuildContext context) => new  SubjectMatter(),
+        'LatestJudgements': (BuildContext context) => new  LatestJudgements(),
+        'LawsOfFederation': (BuildContext context) => new  LawsOfFederation(),
+        'StateRules': (BuildContext context) => new  StateRules(),
+        'Forms': (BuildContext context) => new  Forms(),
+        'OtherRules': (BuildContext context) => new  OtherRules(),
+        'Articles': (BuildContext context) => new  Articles(),
+        'Dictionary': (BuildContext context) => new  Dictionary(),
+        'Maxims': (BuildContext context) => new  Maxims(),
+        'Foreign': (BuildContext context) => new  Foreign(),
+      },
       theme: ThemeData(
 
         primarySwatch: Colors.red,
@@ -38,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
     appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.red),
-    elevation: 7.0,
+    elevation: 15.0,
 
   title:   Image.asset('assets/LGPLogo.png', width: 200.0, height: 50.0,),
       backgroundColor: Colors.white,
@@ -145,8 +168,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height:  25.0),
         Padding(
           padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 30),
-          child: Text('Find authorities on any issue of law in the search box', style: TextStyle(
+          child: Text('Find authorities on any issue of law in the search box below', style: TextStyle(
             color: Colors.white,
+            fontFamily: 'Monseratti',
             fontStyle: FontStyle.normal,
 
 
@@ -235,7 +259,8 @@ return Padding(
                 Padding(
                   padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
                   child:   Text(text, style: TextStyle(
-                      fontSize: 16.0
+                      fontSize: 14.0,
+                    fontFamily: 'Monseratti'
                   ),) ,
                 )
 
@@ -243,11 +268,14 @@ return Padding(
             ),
 
             Icon(Icons.arrow_right)
+
           ],
         ),
+
       ),
 
     ) ,
+
   ),
 
 );

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SubjectMatter extends StatefulWidget{
+class OtherRules extends StatefulWidget{
   @override
-  _SubjectMatter createState()=> _SubjectMatter();
+  _OtherRules createState()=> _OtherRules();
 
 }
 
-class _SubjectMatter extends State<SubjectMatter>{
+class _OtherRules extends State<OtherRules>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,7 +14,7 @@ class _SubjectMatter extends State<SubjectMatter>{
       appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
         elevation: 7.0,
         actionsIconTheme: new IconThemeData(color:  Colors.white),
-        title: Text('Subject Matter Index', style: TextStyle(
+        title: Text('Other Rules of Court', style: TextStyle(
             fontWeight:  FontWeight.bold,
             fontSize: 16.0,
             fontFamily: 'Monseratti',
