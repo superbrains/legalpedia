@@ -18,18 +18,18 @@ class _MySwitchboardState extends State<MySwitchboard>{
         mainAxisSpacing: 20.0,
         shrinkWrap: true,
         children: <Widget>[
-          _buildCard('Judgements', 'assets/latest-judgments.png', (){}),
+          _buildCard('Latest Judgements', 'assets/latest-judgments.png', (){}),
+          _buildCard('Judgements', 'assets/judgements.png',(){}),
+          _buildCard('Laws of the Federation', 'assets/judgements2.png', (){}),
+          _buildCard('State Rules of Court', 'assets/laws.png', (){}),
+          _buildCard('Forms and Precedence', 'assets/forms.png', (){}),
+          _buildCard('Other Rules of Court', 'assets/laws.png',(){}),
+          _buildCard('Legal Articles', 'assets/legal-articles.png', (){}),
+        _buildCard('Law Dictionary', 'assets/dictionay.png',(){}),
+        _buildCard('Legal Maxims', 'assets/maxims.png', (){}),
+          _buildCard('Foreign Legal Resources', 'assets/search.png', (){}),
           _buildCard('Subject Matters', 'assets/laws.png',(){}),
-          _buildCard('Forms', 'assets/forms.png', (){}),
-          _buildCard('Dictionary', 'assets/dictionay.png', (){}),
-          _buildCard('Judgements', 'assets/judgements.png', (){}),
-          _buildCard('Subject Matters', 'assets/judgements.png',(){}),
-          _buildCard('Judgements', 'assets/latest-judgments.png', (){}),
-        _buildCard('Subject Matters', 'assets/laws.png',(){}),
-        _buildCard('Forms', 'assets/forms.png', (){}),
-          _buildCard('Judgements', 'assets/latest-judgments.png', (){}),
-          _buildCard('Subject Matters', 'assets/laws.png',(){}),
-          _buildCard('Forms', 'assets/forms.png', (){}),
+          _buildCard('Updates', 'assets/updates.png', (){}),
 
       ],
     );
@@ -87,7 +87,8 @@ class _MySwitchboardState extends State<MySwitchboard>{
           Text(title, style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12.0
-          ),)
+
+          ), textAlign: TextAlign.center,)
         ],
       ),
       ),

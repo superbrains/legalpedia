@@ -40,11 +40,13 @@ class _MyHomePageState extends State<MyHomePage> {
     appBar: new AppBar(
     elevation: 7.0,
 
-  title:  Image.asset('assets/LGPLogo.png', width: 200.0, height: 50.0,),
+  title:   Image.asset('assets/LGPLogo.png', width: 200.0, height: 50.0,),
       backgroundColor: Colors.red,
 
 ),
       drawer: new Drawer(
+        elevation: 10.0,
+
         child: new Stack(
           children: <Widget>[
             ClipPath(
