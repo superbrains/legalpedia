@@ -36,63 +36,71 @@ class _MySwitchboardState extends State<MySwitchboard>{
   }
 
   _buildCard(String title, String imgPath, Function onTap){
-    return Container(
-      padding: EdgeInsets.all(7.0),
-      height: 50.0,
-      width: 50.0,
-      decoration: BoxDecoration(
+    return
+      InkWell(
 
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.white,
-          boxShadow:[
-            BoxShadow(
-
-                blurRadius: 3.0,
-                spreadRadius: 2.0,
-
-                color: Colors.red.withOpacity(0.3)
-            )
-          ]
-      ),
-
-
-      child:InkWell (
+        borderRadius: BorderRadius.circular(5.0),
 
         splashColor: Colors.redAccent,
-          onTap: onTap,
+        onTap: onTap,
+        child:  Container(
+
+          padding: EdgeInsets.all(7.0),
+          height: 50.0,
+          width: 50.0,
+          decoration: BoxDecoration(
+
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.white,
+              boxShadow:[
+                BoxShadow(
+
+                    blurRadius: 3.0,
+                    spreadRadius: 2.0,
+
+                    color: Colors.red.withOpacity(0.3)
+                )
+              ]
+          ),
+
+
+
           child: Column(
-        children: <Widget>[
-          Stack(
             children: <Widget>[
+              Stack(
+                children: <Widget>[
 
 
-              Container(
-                height: 30.0,
-                width: 50.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
+                  Container(
+                    height: 30.0,
+                    width: 50.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
 
-                    image: AssetImage(imgPath),
-                    fit: BoxFit.scaleDown,
+                          image: AssetImage(imgPath),
+                          fit: BoxFit.scaleDown,
 
-                  )
-                ),
+                        )
+                    ),
 
+                  ),
+
+
+                ],
               ),
+              SizedBox(height: 20.0,),
+              Text(title, style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.0,
+                  fontFamily: 'Monseratti'
 
-
+              ), textAlign: TextAlign.center,)
             ],
           ),
-          SizedBox(height: 20.0,),
-          Text(title, style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12.0
 
-          ), textAlign: TextAlign.center,)
-        ],
-      ),
-      ),
-    );
+        ),
+      );
+
 
   }
 }

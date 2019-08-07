@@ -37,11 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-    appBar: new AppBar(
+    appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.red),
     elevation: 7.0,
 
   title:   Image.asset('assets/LGPLogo.png', width: 200.0, height: 50.0,),
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.white,
 
 ),
       drawer: new Drawer(
