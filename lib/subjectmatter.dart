@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -88,23 +89,35 @@ class _SubjectMatter extends State<SubjectMatter>{
                   padding: EdgeInsets.all(10.0),
                   itemCount: filteredsubMatters.length,
                   itemBuilder: (BuildContext context, int index){
-                    return Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(filteredsubMatters[index].submatter, style: TextStyle(
-                                fontSize: 15.0,
-                                fontFamily: 'Monseratti'
+                   return InkWell(
+                     splashColor: Colors.redAccent,
+                     borderRadius: BorderRadius.circular(10.0),
+                     onTap: (){
+                       setState(() {
+                         
+                       });
+                     },
 
-                            ),),
+                     child:  Card(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(filteredsubMatters[index].submatter, style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontFamily: 'Monseratti'
 
-                          ],
+                              ),),
+
+                            ],
+                          ),
                         ),
-                      ),
+                      )
+                      ,
                     );
+
                   }),
             )
           ],

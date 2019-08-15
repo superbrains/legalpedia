@@ -79,7 +79,7 @@ class _Judgment extends State<Judgment>{
                        mainAxisAlignment: MainAxisAlignment.start,
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: <Widget>[
-                         Text(summaries[index]['statusCited']==null ||  summaries[index]['statusCited'].toString().toUpperCase()=='NIL|'? 'None': summaries[index]['statusCited'], style: TextStyle(
+                         Text(summaries[index]['title']==null ||  summaries[index]['title'].toString().toUpperCase()=='NIL|'? 'None': summaries[index]['title'], style: TextStyle(
                            fontSize: 15.0,
                            fontFamily: 'Monseratti'
 
