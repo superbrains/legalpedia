@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:convert';
 import 'package:legalpedia/classes/SubjectMatter.dart';
 import 'classes/Services.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class SubjectMatter extends StatefulWidget{
   @override
@@ -32,17 +32,32 @@ class _SubjectMatter extends State<SubjectMatter>{
   List<SubjectMatters> subMatters = List();
   List<SubjectMatters> filteredsubMatters = List();
 
+  Future<bool> loader(){
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context)=> AlertDialog(
+          title: ScalingText("Loading..."),
+        ));
+  }
+
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Services.getSubjectMatters().then((subMattersFromServer) {
-      setState(() {
-        subMatters = subMattersFromServer;
-        filteredsubMatters = subMatters;
+    new Future.delayed(Duration.zero, () {
+      loader();
+      Services.getSubjectMatters().then((subMattersFromServer) {
+        setState(() {
+          subMatters = subMattersFromServer;
+          filteredsubMatters = subMatters;
+          Navigator.pop(context);
+        });
       });
+
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +109,7 @@ class _SubjectMatter extends State<SubjectMatter>{
                      borderRadius: BorderRadius.circular(10.0),
                      onTap: (){
                        setState(() {
-                         
+
                        });
                      },
 

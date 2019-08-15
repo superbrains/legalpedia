@@ -3,6 +3,7 @@ import 'package:legalpedia/classes/rules.dart';
 import 'classes/rulesserv.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:progress_indicators/progress_indicators.dart';
 
 class StateRules extends StatefulWidget{
   @override
@@ -16,17 +17,30 @@ class _StateRules extends State<StateRules>{
   List<Rules> rules = List();
   List<Rules> filteredrules = List();
 
+  Future<bool> loader(){
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context)=> AlertDialog(
+          title: ScalingText("Loading..."),
+        ));
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Services.getRules().then((rulesFromServer) {
-      setState(() {
-        rules = rulesFromServer;
-        filteredrules = rules;
+    new Future.delayed(Duration.zero, () {
+      loader();
+      Services.getRules().then((rulesFromServer) {
+        setState(() {
+          rules = rulesFromServer;
+          filteredrules = rules;
+          Navigator.pop(context);
+        });
       });
     });
   }
+
+
 
 
   @override

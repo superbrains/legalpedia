@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class Judgment extends StatefulWidget{
   @override
@@ -15,6 +16,13 @@ class _Judgment extends State<Judgment>{
   Map data;
   List summaries;
 
+  Future<bool> loader(){
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context)=> AlertDialog(
+          title: ScalingText("Loading..."),
+        ));
+  }
 
   Future getData() async {
     var url = 'http://35.231.129.160/api/services/app/summaries/getall';
@@ -30,9 +38,16 @@ class _Judgment extends State<Judgment>{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getData();
+    new Future.delayed(Duration.zero, () {
+      loader();
+
+      getData().then((rulesFromServer) {
+        setState(() {
+        Navigator.pop(context);
+        });
+      });
+    });
   }
 
   @override

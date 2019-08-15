@@ -3,8 +3,10 @@ import 'package:legalpedia/classes/maximclass.dart';
 import 'classes/maximserv.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:progress_indicators/progress_indicators.dart';
 
 class Maxims extends StatefulWidget{
+
   @override
   _Maxims createState()=> _Maxims();
 
@@ -15,17 +17,29 @@ class _Maxims extends State<Maxims>{
   List<MaximList> maxim = List();
   List<MaximList> filteredmaxims = List();
 
+  Future<bool> loader(){
+    return showDialog(context: context,
+    barrierDismissible: false,
+    builder: (context)=> AlertDialog(
+      title: ScalingText("Loading..."),
+    ));
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Services.getMaxims().then((maximsFromServer) {
-      setState(() {
-        maxim = maximsFromServer;
-        filteredmaxims = maxim;
+    new Future.delayed(Duration.zero, () {
+      loader();
+      Services.getMaxims().then((maximsFromServer) {
+        setState(() {
+          maxim = maximsFromServer;
+          filteredmaxims = maxim;
+          Navigator.pop(context);
+        });
       });
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
