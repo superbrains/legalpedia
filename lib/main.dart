@@ -7,14 +7,15 @@ import 'package:legalpedia/judgements.dart';
 import 'package:legalpedia/subjectmatter.dart';
 import 'package:legalpedia/latestjudgements.dart';
 import 'package:legalpedia/lawsoffed.dart';
-import 'package:legalpedia/staterules.dart';
 import 'package:legalpedia/formsandprec.dart';
 import 'package:legalpedia/otherrules.dart';
 import 'package:legalpedia/legalarticles.dart';
 import 'package:legalpedia/dictionary.dart';
 import 'package:legalpedia/maxims.dart';
 import 'package:legalpedia/foreign.dart';
-
+import 'package:legalpedia/states.dart';
+import 'package:legalpedia/login.dart';
+import 'package:legalpedia/verification.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         'SubjectMatter': (BuildContext context) => new  SubjectMatter(),
         'LatestJudgements': (BuildContext context) => new  LatestJudgements(),
         'LawsOfFederation': (BuildContext context) => new  LawsOfFederation(),
-        'StateRules': (BuildContext context) => new  StateRules(),
+        'States': (BuildContext context) => new  States(),
         'Forms': (BuildContext context) => new  Forms(),
         'OtherRules': (BuildContext context) => new  OtherRules(),
         'Articles': (BuildContext context) => new  Articles(),
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'Legalpedia Mobile App'),
+      home: MyHomePage(),
     );
   }
 }

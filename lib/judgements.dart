@@ -1,9 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/widgets.dart';
+
 import 'dart:async';
-import 'dart:convert';
+
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:legalpedia/classes/summaryclass.dart';
+import 'package:legalpedia/classes/summaryserv.dart';
+import 'package:legalpedia/courtspages/courtofappeal.dart' as appealcourt;
+import 'package:legalpedia/courtspages/fedcourt.dart' as fedcourt;
+import 'package:legalpedia/courtspages/industrialcourt.dart' as industcourt;
+import 'package:legalpedia/courtspages/investmentandsecurity.dart' as investcourt;
+import 'package:legalpedia/courtspages/shariacourt.dart' as shariacourt;
+import 'package:legalpedia/courtspages/supremecourt.dart' as supremecourt;
+
 
 class Judgment extends StatefulWidget{
   @override
@@ -11,10 +21,11 @@ class Judgment extends StatefulWidget{
 
 }
 
-class _Judgment extends State<Judgment>{
+class _Judgment extends State<Judgment> with SingleTickerProviderStateMixin{
 
-  Map data;
-  List summaries;
+  List<SummaryList> summary = List();
+  List<SummaryList> filteredsummary = List();
+  TabController controller;
 
   Future<bool> loader(){
     return showDialog(context: context,
@@ -24,31 +35,35 @@ class _Judgment extends State<Judgment>{
         ));
   }
 
-  Future getData() async {
-    var url = 'http://35.231.129.160/api/services/app/summaries/getall';
-    var response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'MaxResultCount': 20, 'SkipCount': 0}));
-    data = json.decode(response.body);
-    setState(() {
-      summaries = data["result"]["items"];
-
-    });
-
-  }
-
-
   @override
   void initState() {
     super.initState();
+    controller = new TabController(vsync: this, length: 6);
     new Future.delayed(Duration.zero, () {
       loader();
-
-      getData().then((rulesFromServer) {
+      Services.getSummary().then((summaryFromServer) {
         setState(() {
-        Navigator.pop(context);
+          summary = summaryFromServer;
+          filteredsummary = summary;
+          Navigator.pop(context);
+          controller.animateTo(1,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.ease,
+          );
+
+
         });
       });
     });
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +72,28 @@ class _Judgment extends State<Judgment>{
     appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
       elevation: 7.0,
       actionsIconTheme: new IconThemeData(color:  Colors.white),
-      title: Text('Judgements', style: TextStyle(
+      title: Text('Judgements by Court', style: TextStyle(
         fontWeight:  FontWeight.bold,
-          fontSize: 16.0,
+          fontSize: 14.0,
           fontFamily: 'Monseratti',
         color: Colors.white
 
       ),),
+      bottom: new TabBar(
+        controller: controller,
+        isScrollable: true,
+
+        tabs: <Widget>[
+
+          new Tab(text: 'Appeal' ),
+        new Tab(text: 'Supreme'),
+          new Tab(text: 'High'),
+          new Tab(text: 'Industrial'),
+          new Tab(text: 'Tribunal'),
+          new Tab(text: 'Sharia'),
+
+        ],
+      ),
       actions: <Widget>[
 
         new IconButton(icon: new Icon(Icons.refresh),onPressed: null,),
@@ -73,47 +103,18 @@ class _Judgment extends State<Judgment>{
 
     ),
     body:
-     Column(
-       children: <Widget>[
-         TextField(
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(10.0),
-            hintText: 'Search by Any Keyword (Suit Case, Date etc)'
-          ),
+    new TabBarView(
+      controller: controller,
+      children: <Widget>[
+        new appealcourt.CourtofAppeal(summary),
+      new supremecourt.SupremeCourt(summary),
+        new fedcourt.FederalCourt(summary),
+        new industcourt.IndustrialCourt(summary),
+        new investcourt.InvestmentCourt(summary),
+        new shariacourt.ShariaCourt(summary),
 
-         ),
-         Expanded(
-           child: ListView.builder(
-               padding: EdgeInsets.all(10.0),
-               itemCount: summaries==null?0: summaries.length,
-               itemBuilder: (BuildContext context, int index){
-                 return Card(
-                   child: Padding(
-                     padding: EdgeInsets.all(10.0),
-                     child: Column(
-                       mainAxisAlignment: MainAxisAlignment.start,
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: <Widget>[
-                         Text(summaries[index]['title']==null ||  summaries[index]['title'].toString().toUpperCase()=='NIL|'? 'None': summaries[index]['title'], style: TextStyle(
-                           fontSize: 15.0,
-                           fontFamily: 'Monseratti'
-
-                         ),),
-                         SizedBox(height: 10.0),
-                         Text(summaries[index]['suitNo']==null ||  summaries[index]['suitNo'].toString().toUpperCase()=='NIL|'? 'None': summaries[index]['suitNo'], style: TextStyle(
-                             fontSize: 10.0,
-                             fontFamily: 'Monseratti',
-                            color: Colors.grey
-
-                         ),),
-                       ],
-                     ),
-                   ),
-                 );
-               }),
-         )
-       ],
-     )
+      ],
+    )
   );
   }
 

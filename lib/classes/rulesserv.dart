@@ -5,7 +5,7 @@ import 'package:legalpedia/classes/rules.dart';
 
 class Services{
 
-  static const String url =   'http://35.231.129.160/api/services/app/rulesofcort/State';
+  static const String url =   'http://35.231.129.160/api/services/app/rulesofcourt/State';
   static Future<List<Rules>> getRules() async{
 
     try{

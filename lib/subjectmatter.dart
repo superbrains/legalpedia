@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:legalpedia/principles.dart';
 import 'package:legalpedia/classes/SubjectMatter.dart';
 import 'classes/Services.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -109,6 +110,9 @@ class _SubjectMatter extends State<SubjectMatter>{
                      borderRadius: BorderRadius.circular(10.0),
                      onTap: (){
                        setState(() {
+                         Navigator.push(context, MaterialPageRoute(builder: (context){
+                           return  Principle(filteredsubMatters[index].id);
+                         }));
 
                        });
                      },

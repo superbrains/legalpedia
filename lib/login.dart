@@ -1,33 +1,80 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:legalpedia/classes/activationclass.dart';
+import 'package:legalpedia/verification.dart';
+import 'package:legalpedia/classes/activationserv.dart';
 
-void main() => runApp(MyApp());
+import 'package:progress_indicators/progress_indicators.dart';
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+
+class Activation extends StatefulWidget{
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+  _Activation createState()=> _Activation();
 
-        primarySwatch: Colors.red,
-      ),
-      home: MyHomePage(title: 'Legalpedia Mobile App'),
-    );
+}
+
+
+class _Activation extends State<Activation> {
+String phone;
+String mac;
+String phoneAct;
+
+TextEditingController phoneController =  TextEditingController();
+TextEditingController nameController =  TextEditingController();
+
+Future<bool> loader(){
+  return showDialog(context: context,
+      barrierDismissible: false,
+      builder: (context)=> AlertDialog(
+        title: ScalingText("Getting OTP. Please wait...", style: TextStyle(
+          fontSize: 14
+        ),),
+      ));
+}
+
+
+Future<bool> dialog(){
+  return showDialog(context: context,
+      barrierDismissible: false,
+      builder: (context)=> AlertDialog(
+        title: Text("Could Not Get OTP. Phonenumber not Registered. Call Our Support Line or Click Create Account to Subscribe", style: TextStyle(
+            fontSize: 14,
+          color: Colors.red
+
+        ),),
+      ));
+}
+
+
+  void getOtp(){
+    new Future.delayed(Duration.zero, () {
+      loader();
+      Services.getOTP(phone, mac).then((responseFromServer) {
+        setState(() {
+          phoneAct = responseFromServer;
+          try{
+          if(phoneAct=='Error'){
+              Navigator.pop(context);
+              dialog();
+            //Show a Dialog Box and ask them to create an account
+          }else{
+
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+              return Verification(phone, mac);
+            }));
+
+          }
+          }
+          catch(e){
+            Navigator.pop(context);
+            dialog();
+          }
+        });
+      });
+    });
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                      child:  Image.asset('assets/LGPLogo.png')
+                      child:  Image.asset('assets/LGPLogo.png', height: 30.0)
                     )
                   ],
                 )
@@ -52,8 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    controller: nameController,
                     decoration: InputDecoration(
-                        labelText: 'EMAIL or USERNAME',
+                        labelText: 'FULL NAME',
                         labelStyle:  TextStyle(
                             fontFamily: 'MontSerrat',
                             fontWeight: FontWeight.bold
@@ -62,30 +110,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   SizedBox(height: 20.0),
                   TextField(
+                    controller: phoneController,
                     decoration: InputDecoration(
-                        labelText: 'PASSWORD',
+                        labelText: 'PHONE NUMBER or EMAIL',
                         labelStyle:  TextStyle(
                             fontFamily: 'MontSerrat',
                             fontWeight: FontWeight.bold
                         )
                     ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 5.0),
-                  Container(
-                    alignment: Alignment(1.0,0.0),
-                    padding: EdgeInsets.only(top:15.0, left: 20.0),
-                    child: InkWell(
-                      child: Text('Forgot Password',
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'MontSerrat',
-                              decoration: TextDecoration.underline)
-                      ) ,
 
-                    ),
                   ),
+
                   SizedBox(height: 40.0),
                   Container(
                     height: 40.0,
@@ -95,10 +130,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.red,
                         elevation: 7.0,
                         child: GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            phone= phoneController.text;
+                            mac= phoneController.text;
+                            getOtp();
+
+                          },
                           child: Center(
                             child: Text(
-                              'LOGIN',
+                              'REQUEST ACTIVATION CODE',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

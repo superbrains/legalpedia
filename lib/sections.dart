@@ -1,53 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:legalpedia/classes/lawclass.dart';
-import 'classes/lawserv.dart';
-import  'package:legalpedia/lawoffedDetails.dart';
-import 'package:progress_indicators/progress_indicators.dart';
-import 'package:intl/intl.dart';
+import 'package:legalpedia/rules.dart';
 
-class LawsOfFederation extends StatefulWidget{
+class Sections extends StatefulWidget{
+  final String statetype;
+  final String selectedstate;
+
+  Sections(this.statetype, this.selectedstate);
   @override
-  _LawsOfFederation createState()=> _LawsOfFederation();
+  _Sections createState()=> _Sections(this.statetype, this.selectedstate);
 
 }
 
-class _LawsOfFederation extends State<LawsOfFederation>{
+class _Sections extends State<Sections>{
+final String statetype;
+final String selectedstate;
 
-  List<LawList> laws = List();
-  List<LawList> filteredlaws = List();
+_Sections(this.statetype, this.selectedstate);
 
-  Future<bool> loader(){
-    return showDialog(context: context,
-        barrierDismissible: false,
-        builder: (context)=> AlertDialog(
-          title: ScalingText("Loading..."),
-        ));
-  }
+  final List<String> sections = ["Orders", "Parts", "Schedules", "Forms", "Portrate Forms", "Civil Forms", "Appendix"];
+  List<String> filteredsections = List();
+
+
 
   @override
   void initState() {
     super.initState();
-    new Future.delayed(Duration.zero, () {
-      loader();
-      Services.getLaws().then((lawsFromServer) {
-        setState(() {
-          laws = lawsFromServer;
-          filteredlaws = laws;
-          Navigator.pop(context);
-        });
-      });
+    setState(() {
+
+      filteredsections = sections;
+
     });
+
   }
 
-  String getDate(str){
 
-    var parsedDate = DateTime.parse(str);
-
-    var formatter = new DateFormat('yyyy-MM-dd');
-    String formatted = formatter.format(parsedDate);
-
-    return formatted;
-  }
 
 
   @override
@@ -57,7 +43,7 @@ class _LawsOfFederation extends State<LawsOfFederation>{
       appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
         elevation: 7.0,
         actionsIconTheme: new IconThemeData(color:  Colors.white),
-        title: Text('Laws of the Federation', style: TextStyle(
+        title: Text('$selectedstate : Select Section', style: TextStyle(
             fontWeight:  FontWeight.bold,
             fontSize: 16.0,
             fontFamily: 'Monseratti',
@@ -78,14 +64,13 @@ class _LawsOfFederation extends State<LawsOfFederation>{
           TextField(
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(10.0),
-                hintText: 'Search Laws...'
+                hintText: 'Search Section...'
             ),
             onChanged: (string){
 
               setState(() {
-                filteredlaws = laws.where((u)=>
-                (u.title.toLowerCase().contains(string.toLowerCase()) ||
-                    u.lawDate.toLowerCase().contains(string.toLowerCase()))).toList();
+                filteredsections = sections.where((u)=>
+                (u.toLowerCase().contains(string.toLowerCase()))).toList();
               });
 
 
@@ -94,17 +79,17 @@ class _LawsOfFederation extends State<LawsOfFederation>{
           Expanded(
             child: ListView.builder(
                 padding: EdgeInsets.all(10.0),
-                itemCount:  filteredlaws.length,
+                itemCount:  filteredsections.length,
                 itemBuilder: (BuildContext context, int index){
                   return InkWell(
                     splashColor: Colors.redAccent,
                     borderRadius: BorderRadius.circular(10.0),
                     onTap: (){
                       setState(() {
-
                         Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return LawofFederationDetail(filteredlaws[index].id);
+                          return  Rules(statetype, selectedstate, filteredsections[index].toString());
                         }));
+
                       });
                     },
 
@@ -115,20 +100,9 @@ class _LawsOfFederation extends State<LawsOfFederation>{
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(filteredlaws[index].title, style: TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'Monseratti',
-
-
-                            ),),
-                            SizedBox(height: 15.0),
-
-                            Text(getDate(filteredlaws[index].lawDate)  , style: TextStyle(
-                                fontSize: 12.0,
-                                fontFamily: 'Monseratti',
-
-                                color: Colors.grey
-
+                            Text(filteredsections[index].toString(), style: TextStyle(
+                                fontSize: 15.0,
+                                fontFamily: 'Monseratti'
 
                             ),),
 
