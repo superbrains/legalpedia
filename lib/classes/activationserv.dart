@@ -21,6 +21,39 @@ class Services{
     }
   }
 
+  static Future<String> activatePhone(String otp, String mac) async{
+    String url =  'http://35.231.129.160/api/services/app/license/activate?code=$otp&systemId=$mac';
+
+    try{
+      final response = await http.post(url,  headers: {'content-type' : 'application/json'});
+      if(response.statusCode==200){
+        String list = parseSuccess(response.body);
+        return list;
+      }else {
+        return "Error";
+      }
+    }
+    catch(e){
+      return "Error";
+    }
+  }
+
+  static Future<String> getinfo(String result) async{
+    String url =  'http://35.231.129.160/api/services/app/license/getinfo';
+
+    try{
+      final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'key': result}));
+      if(response.statusCode==200){
+        String list = parseSuccess(response.body);
+        return list;
+      }else {
+        return "Error";
+      }
+    }
+    catch(e){
+      return "Error";
+    }
+  }
   static String parseSuccess(String responseBody){
 
     final parsed = json.decode(responseBody)["result"];

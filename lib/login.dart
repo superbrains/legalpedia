@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:legalpedia/classes/activationclass.dart';
 import 'package:legalpedia/verification.dart';
 import 'package:legalpedia/classes/activationserv.dart';
-
+import 'package:legalpedia/main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -19,6 +20,7 @@ class _Activation extends State<Activation> {
 String phone;
 String mac;
 String phoneAct;
+String name;
 
 TextEditingController phoneController =  TextEditingController();
 TextEditingController nameController =  TextEditingController();
@@ -61,7 +63,7 @@ Future<bool> dialog(){
           }else{
 
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-              return Verification(phone, mac);
+              return Verification(phone, mac, name);
             }));
 
           }
@@ -75,6 +77,28 @@ Future<bool> dialog(){
     });
   }
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      SharedPreferences.getInstance().then((ss){
+
+        name =ss.getString('Name') ?? 'null';
+        phone =ss.getString('Phone') ?? 'null';
+
+         if(name!='null'){
+
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+          return MyHomePage(name,phone);
+        }));
+
+      }
+
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +157,7 @@ Future<bool> dialog(){
                           onTap: (){
                             phone= phoneController.text;
                             mac= phoneController.text;
+                            name = nameController.text;
                             getOtp();
 
                           },

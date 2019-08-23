@@ -1,19 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:legalpedia/classes/activationserv.dart';
+import 'package:legalpedia/main.dart';
+import 'package:progress_indicators/progress_indicators.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Verification extends StatefulWidget{
 
   final phone;
   final mac;
+  final name;
 
-  Verification(this.phone, this.mac);
+  Verification(this.phone, this.mac, this.name);
 
   @override
   State<StatefulWidget> createState(){
 
-   return _Verification(this.phone, this.mac);
+   return _Verification(this.phone, this.mac, this.name);
   }
 
 }
@@ -23,10 +27,73 @@ class _Verification extends State<Verification> {
 
   final phone;
   final mac;
+  final name;
+  String otp;
+  String res;
   TextEditingController otpController =  TextEditingController();
 
 
-  _Verification(this.phone, this.mac);
+  _Verification(this.phone, this.mac, this.name);
+
+  Future<bool> loader(){
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context)=> AlertDialog(
+          title: ScalingText("Activating Device. Please wait...", style: TextStyle(
+              fontSize: 14
+          ),),
+        ));
+  }
+
+
+  Future<bool> dialog(){
+    return showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context)=> AlertDialog(
+          title: Text("This Device Could not be activated at the moment", style: TextStyle(
+              fontSize: 14,
+              color: Colors.red
+
+          ),),
+        ));
+  }
+
+  void activatephone(){
+    new Future.delayed(Duration.zero, () {
+      loader();
+      Services.activatePhone(otp, mac).then((responseFromServer) {
+        setState(() {
+          res = responseFromServer;
+          try{
+            if(res=='Error'){
+              Navigator.pop(context);
+              dialog();
+              //Show a Dialog Box and ask them to create an account
+            }else{
+
+              SharedPreferences.getInstance().then((ss){
+                ss.setString('Name', name);
+                ss.setString("Phone", phone);
+
+
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                  return MyHomePage(name, phone);
+                }));
+
+              });
+
+
+            }
+          }
+          catch(e){
+            Navigator.pop(context);
+            dialog();
+          }
+        });
+      });
+    });
+  }
+
 
 
   @override
@@ -88,7 +155,10 @@ class _Verification extends State<Verification> {
                         color: Colors.red,
                         elevation: 7.0,
                         child: GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            otp= otpController.text;
+                            activatephone();
+                          },
                           child: Center(
                             child: Text(
                               'ACTIVATE',

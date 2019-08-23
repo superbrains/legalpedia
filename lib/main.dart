@@ -15,11 +15,22 @@ import 'package:legalpedia/maxims.dart';
 import 'package:legalpedia/foreign.dart';
 import 'package:legalpedia/states.dart';
 import 'package:legalpedia/login.dart';
-import 'package:legalpedia/verification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
+
+  String getName(){
+
+    return '';
+  }
+  String getPhone(){
+
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,21 +52,26 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(),
+      home: Activation(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
+  final name;
+  final phone;
+  MyHomePage(this.name, this.phone);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(this.name, this.phone);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final name;
+  final phone;
+  _MyHomePageState(this.name, this.phone);
 
   @override
   Widget build(BuildContext context) {
@@ -105,14 +121,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   ),
                   SizedBox(height: 10),
-                  Text('Obi Azubike',
+                  Text(name,
                   style: TextStyle(
                     fontSize: 25.0,
                     fontFamily: 'Monseratti',
                     fontWeight: FontWeight.bold
                   ),),
                   SizedBox(height: 5),
-                  Text('License Expires on the 5th of September, 2019',
+                  Text(phone,
                     style: TextStyle(
                         fontSize: 12.0,
                         fontFamily: 'Monseratti',
@@ -155,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //  backgroundColor: Color.alphaBlend(Colors.redAccent,  Colors.redAccent),
 
       body: new  ListView(
+      
         children: <Widget>[
           Column(
             children: <Widget>[
@@ -209,14 +226,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               SizedBox(height: 40.0,),
-              Container(
-                height: MediaQuery.of(context).size.height - 150.0,
-                child: Column(
-                  children: <Widget>[
-                    new MySwitchboard()
-                  ],
-                ),
-              )
+              ListView(
+                 shrinkWrap: true,
+                children: <Widget>[
+                      new MySwitchboard()
+                ],
+              ),
+
+
             ],
           )
         ],
