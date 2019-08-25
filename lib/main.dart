@@ -18,6 +18,7 @@ import 'package:legalpedia/login.dart';
 import 'package:legalpedia/feedback.dart';
 
 import 'package:legalpedia/socialmedia.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
