@@ -25,11 +25,12 @@ class _MySwitchboardState extends State<MySwitchboard>{
           _buildCard('Subject matters', 'assets/judgements.png',(){Navigator.of(context).pushNamed('SubjectMatter');}),
           _buildCard('Laws of the Federation', 'assets/judgements2.png', (){Navigator.of(context).pushNamed('LawsOfFederation');}),
           _buildCard('State Rules of Court', 'assets/laws.png', (){Navigator.of(context).pushNamed('States');}),
+            _buildCard('Other Rules of Court', 'assets/laws.png',(){Navigator.of(context).pushNamed('OtherRules');}),
           _buildCard('Forms and Precedence', 'assets/forms.png', (){Navigator.of(context).pushNamed('Forms');}),
-          _buildCard('Other Rules of Court', 'assets/laws.png',(){Navigator.of(context).pushNamed('OtherRules');}),
-          _buildCard('Legal Articles', 'assets/legal-articles.png', (){Navigator.of(context).pushNamed('Articles');}),
-        _buildCard('Law Dictionary', 'assets/dictionay.png',(){Navigator.of(context).pushNamed('Dictionary');}),
+         _buildCard('Law Dictionary', 'assets/dictionay.png',(){Navigator.of(context).pushNamed('Dictionary');}),
         _buildCard('Legal Maxims', 'assets/maxims.png', (){Navigator.of(context).pushNamed('Maxims');}),
+          _buildCard('Legal Articles', 'assets/legal-articles.png', (){Navigator.of(context).pushNamed('Articles');}),
+      
           _buildCard('Foreign Legal Resources', 'assets/search.png', (){Navigator.of(context).pushNamed('Foreign');}),
 
           _buildCard('Updates', 'assets/updates.png', (){}),

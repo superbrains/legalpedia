@@ -84,13 +84,14 @@ class _Judgment extends State<Judgment> with SingleTickerProviderStateMixin{
         isScrollable: true,
 
         tabs: <Widget>[
-
+          new Tab(text: 'Supreme'),
           new Tab(text: 'Appeal' ),
-        new Tab(text: 'Supreme'),
+      
           new Tab(text: 'High'),
+           new Tab(text: 'Sharia'),
           new Tab(text: 'Industrial'),
           new Tab(text: 'Tribunal'),
-          new Tab(text: 'Sharia'),
+         
 
         ],
       ),
@@ -106,12 +107,14 @@ class _Judgment extends State<Judgment> with SingleTickerProviderStateMixin{
     new TabBarView(
       controller: controller,
       children: <Widget>[
+         new supremecourt.SupremeCourt(summary),
         new appealcourt.CourtofAppeal(summary),
-      new supremecourt.SupremeCourt(summary),
+     
         new fedcourt.FederalCourt(summary),
+         new shariacourt.ShariaCourt(summary),
         new industcourt.IndustrialCourt(summary),
         new investcourt.InvestmentCourt(summary),
-        new shariacourt.ShariaCourt(summary),
+       
 
       ],
     )

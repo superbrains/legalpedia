@@ -15,7 +15,9 @@ import 'package:legalpedia/maxims.dart';
 import 'package:legalpedia/foreign.dart';
 import 'package:legalpedia/states.dart';
 import 'package:legalpedia/login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:legalpedia/feedback.dart';
+
+import 'package:legalpedia/socialmedia.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'LEGALPEDIA',
       routes: <String, WidgetBuilder>{
         'Judgment': (BuildContext context) => new Judgment(),
@@ -107,9 +110,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 100.0,
                     height: 100.0,
                     decoration: BoxDecoration(
+                      
                       color: Colors.white,
                       image: DecorationImage(
-                        image: NetworkImage('http://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                        image: AssetImage('assets/Applogo.png'),
                         fit: BoxFit.cover
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(100.0)),
@@ -150,12 +154,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
               child: new Column(
                 children: <Widget>[
-                  CustomListTile(Icons.help_outline, 'Ask a Legalpedia Lawyer', ()=>{}),
-                  CustomListTile(Icons.account_box, 'About Legapedia', ()=>{}),
-                  CustomListTile(Icons.feedback, 'Feedback', ()=>{}),
-                  CustomListTile(Icons.face, 'Visit Our Facebook Page', ()=>{}),
-                  CustomListTile(Icons.transfer_within_a_station, 'Visit Our Twitter Page', ()=>{}),
-                  CustomListTile(Icons.lock, 'Logout', ()=>{}),
+                  CustomListTile(Icons.help_outline, 'Join Our Community', ()=>{
+                      
+                     Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return SocialMedia();
+                      }))
+
+                  }),
+                  CustomListTile(Icons.account_box, 'About Legapedia', ()=>{
+
+                  }),
+                  CustomListTile(Icons.feedback, 'Feedback', ()=>{
+                     Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return FeedBack();
+                      }))
+                  }),
+                 
                 ],
               ),
             )
