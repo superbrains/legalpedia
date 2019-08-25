@@ -36,11 +36,11 @@ Future<bool> loader(){
 }
 
 
-Future<bool> dialog(){
+Future<bool> dialog(str){
   return showDialog(context: context,
       barrierDismissible: false,
       builder: (context)=> AlertDialog(
-        title: Text("Could Not Get OTP. Phonenumber not Registered. Call Our Support Line or Click Create Account to Subscribe", style: TextStyle(
+        title: Text(str, style: TextStyle(
             fontSize: 14,
           color: Colors.red
 
@@ -56,9 +56,9 @@ Future<bool> dialog(){
         setState(() {
           phoneAct = responseFromServer;
           try{
-          if(phoneAct=='Error'){
+          if(phoneAct.contains('Error')){
               Navigator.pop(context);
-              dialog();
+              dialog(phoneAct);
             //Show a Dialog Box and ask them to create an account
           }else{
 
@@ -70,7 +70,7 @@ Future<bool> dialog(){
           }
           catch(e){
             Navigator.pop(context);
-            dialog();
+            dialog(e.toString());
           }
         });
       });

@@ -13,11 +13,12 @@ class Services{
         String list = parseSuccess(response.body);
         return list;
       }else {
-        return "Error";
+         String list = parseError(response.body);
+        return 'Error: $list';
       }
     }
     catch(e){
-      return "Error";
+      return e.toString();
     }
   }
 
@@ -47,16 +48,22 @@ class Services{
         String list = parseSuccess(response.body);
         return list;
       }else {
-        return "Error";
+        String list = parseError(response.body);
+        return 'Error: $list';
       }
     }
     catch(e){
-      return "Error";
+      return 'Error: $e.toString()';
     }
   }
   static String parseSuccess(String responseBody){
 
     final parsed = json.decode(responseBody)["result"];
+    return parsed.toString();//.map<PhoneActivation>((json)=> PhoneActivation.fromJson(json)).toList();
+  }
+ static String parseError(String responseBody){
+
+    final parsed = json.decode(responseBody)["error"]["message"];
     return parsed.toString();//.map<PhoneActivation>((json)=> PhoneActivation.fromJson(json)).toList();
   }
 
