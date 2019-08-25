@@ -15,7 +15,7 @@ class Activation extends StatefulWidget{
 
 }
 
-
+//Activation
 class _Activation extends State<Activation> {
 String phone;
 String mac;

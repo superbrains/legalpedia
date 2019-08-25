@@ -21,7 +21,7 @@ class Services{
       return e.toString();
     }
   }
-
+//Activate Phone
   static Future<String> activatePhone(String otp, String mac) async{
     String url =  'http://35.231.129.160/api/services/app/license/activate?code=$otp&systemId=$mac';
 
