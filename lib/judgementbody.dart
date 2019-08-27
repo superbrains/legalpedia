@@ -24,7 +24,7 @@ class JudegementBody extends StatefulWidget{
 
 class _JudegementBody extends State<JudegementBody>{
 
- 
+ //
   final String id;
   JudgementFullBody filteredJudgement;
 

@@ -12,7 +12,7 @@ class JudgementDetail extends StatefulWidget{
   List<SummaryList> filteredsummary = List();
 
   JudgementDetail(this.summary, this.suitNo);
-
+//
 
   @override
   _JudgementDetail createState()=> _JudgementDetail(this.summary, this.suitNo);

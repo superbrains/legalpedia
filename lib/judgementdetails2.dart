@@ -11,7 +11,7 @@ class JudgementDetail extends StatefulWidget{
   List<RelatedCaseList> filteredsummary = List();
 
   JudgementDetail(this.summary, this.suitNo);
-
+//
 
   @override
   _JudgementDetail createState()=> _JudgementDetail(this.summary, this.suitNo);

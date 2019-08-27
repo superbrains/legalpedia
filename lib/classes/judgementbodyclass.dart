@@ -3,7 +3,7 @@
 //     final judgementFullBody = judgementFullBodyFromJson(jsonString);
 
 import 'dart:convert';
-
+//
 class JudgementFullBody {
     Result result;
     dynamic targetUrl;
