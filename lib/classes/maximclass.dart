@@ -4,7 +4,7 @@ class MaximList{
   String content;
   String versionNo;
   int id;
-
+//
 
   MaximList({this.uuid, this.title, this.content, this.versionNo, this.id});
 
