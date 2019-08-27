@@ -129,7 +129,7 @@ body:    Center(
                                 ),),
                                 SizedBox(height: 20.0),
                                 Text(filteredlaws.result.lawNo ==null?'None':filteredlaws.result.lawNo , textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 15.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green

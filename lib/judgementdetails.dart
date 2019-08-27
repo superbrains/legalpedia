@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:legalpedia/classes/summaryclass.dart';
 import 'package:intl/intl.dart';
+import 'package:legalpedia/judgementbody.dart';
 
 class JudgementDetail extends StatefulWidget{
 
@@ -104,13 +106,13 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 10.0),
                                 Text(filteredsummary[index].title==null?'Not Available': filteredsummary[index].title, textAlign: TextAlign.center, style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
+                                    fontSize: 18.0,
                                     fontFamily: 'Monseratti'
 
                                 ),),
                                 SizedBox(height: 20.0),
                                 Text(filteredsummary[index].legalpediaCitation==null?'None':filteredsummary[index].legalpediaCitation, textAlign: TextAlign.center, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
                                   fontWeight: FontWeight.bold,
                                   color: Colors.green
@@ -118,35 +120,35 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 SizedBox(height: 20.0),
                                 Text(filteredsummary[index].court==null?'Not Available': filteredsummary[index].court, textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
 
                                 ),),
 
                                 Text( filteredsummary[index].judgementDate==null?'Not Available': getDate(filteredsummary[index].judgementDate) , textAlign: TextAlign.center, style: TextStyle(
-                                  fontSize: 12.0,
+                                  fontSize: 14.0,
                                   fontFamily: 'Monseratti',
 
 
                                 ),),
                                 SizedBox(height: 40.0),
                                 Text('SUIT NUMBER', textAlign: TextAlign.center, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
                                   fontWeight: FontWeight.bold,
                                   color: Colors.redAccent
 
                                 ),),
                                 Text(filteredsummary[index].suitNo==null?'Not Available:':filteredsummary[index].suitNo, textAlign: TextAlign.center, style: TextStyle(
-                                  fontSize: 13.0,
+                                  fontSize: 14.0,
                                   fontFamily: 'Monseratti',
                                   fontWeight: FontWeight.bold
 
                                 ),),
                                 SizedBox(height: 30.0),
                                 Text('CORAMS', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -154,14 +156,16 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
 
                               Container(
-                                height: getHeight(filteredsummary[index].corams.length),
+                               
                                 alignment: Alignment.center,
                                 child:  ListView.builder(
-
+                                   
+                                    shrinkWrap: true,
+                                     physics: ClampingScrollPhysics(),
                                     itemCount: filteredsummary[index].corams.length,
                                     itemBuilder: (BuildContext context, int count){
                                       return  Text(filteredsummary[index].corams[count].toString()==null?'Not Available':filteredsummary[index].corams[count].toString(), textAlign: TextAlign.center, style: TextStyle(
-                                        fontSize: 14.0,
+                                        fontSize: 16.0,
                                         fontFamily: 'Monseratti',
 
                                       ),);
@@ -174,21 +178,21 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 20.0,),
 
                                 Text('PARTY TYPE A', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
 
                                 ),),
                                 Text(filteredsummary[index].partyAType==null?'Not Available':filteredsummary[index].partyAType, textAlign: TextAlign.center, style : TextStyle(
-                                fontSize: 14.0,
+                                fontSize: 16.0,
                                 fontFamily: 'Monseratti',
 
                                 ),),
                                 SizedBox(height: 20.0),
 
                                 Text('PARTY NAME', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green
@@ -203,21 +207,21 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 20.0,),
 
                                 Text('PARTY TYPE B', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
 
                                 ),),
                                 Text(filteredsummary[index].partyBType==null?'Not Available':filteredsummary[index].partyBType, textAlign: TextAlign.center, style : TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
                                 ),),
                                 SizedBox(height: 20.0),
 
                                 Text('PARTY NAME', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 12.0,
+                                    fontSize: 14.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green
@@ -232,7 +236,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 30.0),
 
                                 Text('SUMMARY OF FACTS', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -240,15 +244,15 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 10,),
                                 Text(filteredsummary[index].summaryOfFacts==null?'Not Available':filteredsummary[index].summaryOfFacts, textAlign: TextAlign.left, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
-
+                                 
 
                                 ),),
                                 SizedBox(height: 30.0,),
 
                                 Text('HELD', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -256,7 +260,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 10,),
                                 Text(filteredsummary[index].held==null?'Not Available':filteredsummary[index].held , textAlign: TextAlign.left, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
 
@@ -264,7 +268,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 30.0,),
 
                                 Text('ISSUE', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -272,7 +276,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 10,),
                                 Text(filteredsummary[index].issues==null?'Not Available':filteredsummary[index].issues, textAlign: TextAlign.left, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
 
@@ -280,7 +284,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 30.0,),
 
                                 Text('RATIO', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -290,22 +294,24 @@ class _JudgementDetail extends State<JudgementDetail>{
                               Column(
                                 children: <Widget>[
                                   Container(
-                                    height: getHeight(filteredsummary[index].ratios.length ),
+                                   
                                     child:  ListView.builder(
-
+                                        shrinkWrap: true,
+                                        physics: ClampingScrollPhysics(),
                                         itemCount: filteredsummary[index].ratios.length,
                                         itemBuilder: (BuildContext context, int count){
                                           return Column(
                                             children: <Widget>[
                                               Text(filteredsummary[index].ratios[count].heading==null?'Not Available':filteredsummary[index].ratios[count].heading, style: TextStyle(
-                                                fontSize: 12.0,
+                                                fontSize: 14.0,
                                                 fontFamily: 'Monseratti',
+                                                fontWeight: FontWeight.bold
 
                                               ),
                                               ),
                                               SizedBox(height: 5.0,),
                                               Text(filteredsummary[index].ratios[count].body==null?'Not Available':filteredsummary[index].ratios[count].body, style: TextStyle(
-                                                fontSize: 12.0,
+                                                fontSize: 16.0,
                                                 fontFamily: 'Monseratti',
 
                                               ),
@@ -325,7 +331,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 SizedBox(height: 30.0,),
                                 Text('CASES SITED', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -333,14 +339,14 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 10,),
                                 Text(filteredsummary[index].casesCited==null?'Not Available': filteredsummary[index].casesCited , textAlign: TextAlign.left, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
 
                                 ),),
                                 SizedBox(height: 30.0,),
                                 Text('STATUS SITED', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -348,7 +354,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 10,),
                                 Text(filteredsummary[index].statusCited==null?'Not Available': filteredsummary[index].statusCited , textAlign: TextAlign.left, style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
 
@@ -363,7 +369,9 @@ class _JudgementDetail extends State<JudgementDetail>{
                                       elevation: 7.0,
                                       child: GestureDetector(
                                         onTap: (){
-
+                                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                          return JudegementBody(filteredsummary[index].suitNo);
+                                            }));
                                         },
                                         child: Center(
                                           child: Text(

@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //  backgroundColor: Color.alphaBlend(Colors.redAccent,  Colors.redAccent),
 
       body: new  ListView(
-      
+        shrinkWrap: true,
         children: <Widget>[
           Column(
             children: <Widget>[
@@ -241,13 +241,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               SizedBox(height: 40.0,),
-              ListView(
-                 shrinkWrap: true,
-                children: <Widget>[
-                      new MySwitchboard()
-                ],
-              ),
+              Column(children: <Widget>[
+                 new MySwitchboard()
+              ],),
+             
 
+             
 
             ],
           )
