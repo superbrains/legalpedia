@@ -4,12 +4,13 @@ import 'package:flutter/rendering.dart';
 import 'package:legalpedia/classes/summaryclass.dart';
 import 'package:intl/intl.dart';
 import 'package:legalpedia/judgementbody.dart';
+import 'package:legalpedia/models/summarymodel.dart';
 
 class JudgementDetail extends StatefulWidget{
 
-  final List<SummaryList> summary;
+  final List<SummaryModel> summary;
   final String  suitNo;
-  List<SummaryList> filteredsummary = List();
+  List<SummaryModel> filteredsummary = List();
 
   JudgementDetail(this.summary, this.suitNo);
 //
@@ -21,9 +22,9 @@ class JudgementDetail extends StatefulWidget{
 
 class _JudgementDetail extends State<JudgementDetail>{
 
-  final List<SummaryList> summary;
+  final List<SummaryModel> summary;
   final String  suitNo;
-  List<SummaryList> filteredsummary = List();
+  List<SummaryModel> filteredsummary = List();
 
   _JudgementDetail(this.summary, this.suitNo);
 
@@ -48,12 +49,17 @@ class _JudgementDetail extends State<JudgementDetail>{
 
   String getDate(str){
 
+    try{
     var parsedDate = DateTime.parse(str);
 
     var formatter = new DateFormat('yyyy-MM-dd');
     String formatted = formatter.format(parsedDate);
 
     return formatted;
+    } 
+    catch(e){
+      return 'Invalid Date';
+    }
   }
 
   double getHeight(height){
@@ -155,7 +161,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
 
-                              Container(
+                             /* Container(
                                
                                 alignment: Alignment.center,
                                 child:  ListView.builder(
@@ -174,7 +180,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),
 
-                              ),
+                              ),*/
                                 SizedBox(height: 20.0,),
 
                                 Text('PARTY TYPE A', textAlign: TextAlign.center, style: TextStyle(
@@ -291,7 +297,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10.0,),
-                              Column(
+                             /* Column(
                                 children: <Widget>[
                                   Container(
                                    
@@ -327,7 +333,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                   ),
                                 ],
-                              ),
+                              ),*/
 
                                 SizedBox(height: 30.0,),
                                 Text('CASES SITED', textAlign: TextAlign.center, style: TextStyle(

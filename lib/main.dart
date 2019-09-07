@@ -19,11 +19,17 @@ import 'package:legalpedia/feedback.dart';
 //
 import 'package:legalpedia/socialmedia.dart';
 
+
+import 'package:sqflite/sqflite.dart';
+import 'package:legalpedia/models/summarymodel.dart';
+import 'package:legalpedia/utils/database_helper.dart';
+
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
 
-  // This widget is the root of your application.
+
 
   String getName(){
 
@@ -34,13 +40,40 @@ class MyApp extends StatelessWidget {
     return '';
   }
 
+   List<SummaryModel> summary = List();
+  List<SummaryModel> filteredsummary = List();
+
+
+   DatabaseHelper databaseHelper = DatabaseHelper();
+
+  int count = 0;
+
+     updateListview() async{
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<SummaryModel>> summaryListFuture =
+          databaseHelper.getSummaryList();
+      summaryListFuture.then((summaryList) {
+      // setState(() {
+          this.summary = summaryList;
+          
+         this.filteredsummary = summaryList;
+         this.count = filteredsummary.length;
+      // });
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    updateListview();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'LEGALPEDIA',
       routes: <String, WidgetBuilder>{
-        'Judgment': (BuildContext context) => new Judgment(),
+        'Judgment': (BuildContext context) => new Judgment(this.summary),
         'SubjectMatter': (BuildContext context) => new  SubjectMatter(),
         'LatestJudgements': (BuildContext context) => new  LatestJudgements(),
         'LawsOfFederation': (BuildContext context) => new  LawsOfFederation(),
@@ -77,13 +110,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final phone;
   _MyHomePageState(this.name, this.phone);
 
+   
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+      
     appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.red),
     elevation: 15.0,
-
+  
   title:   Image.asset('assets/LGPLogo.png', width: 200.0, height: 50.0,),
       backgroundColor: Colors.white,
 

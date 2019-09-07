@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:legalpedia/classes/summaryclass.dart';
+
 import 'package:legalpedia/judgementdetails.dart';
+import 'package:legalpedia/models/summarymodel.dart';
 
 class ShariaCourt extends StatefulWidget{
 
-  final List<SummaryList> summary;
-  List<SummaryList> summary2 = List();
-  List<SummaryList> filteredsummary = List();
+  final List<SummaryModel> summary;
+  List<SummaryModel> summary2 = List();
+  List<SummaryModel> filteredsummary = List();
 
   ShariaCourt(this.summary);
 
@@ -18,9 +19,9 @@ class ShariaCourt extends StatefulWidget{
 
 class _ShariaCourt extends State<ShariaCourt>{
 
-  final List<SummaryList> summary;
-  List<SummaryList> summary2 = List();
-  List<SummaryList> filteredsummary = List();
+  final List<SummaryModel> summary;
+  List<SummaryModel> summary2 = List();
+  List<SummaryModel> filteredsummary = List();
 
   _ShariaCourt(this.summary);
 

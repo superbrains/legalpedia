@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:legalpedia/classes/summaryclass.dart';
+
 import 'package:legalpedia/judgementdetails.dart';
+import 'package:legalpedia/models/summarymodel.dart';
 
 class IndustrialCourt extends StatefulWidget{
 
-  final List<SummaryList> summary;
-  List<SummaryList> summary2 = List();
-  List<SummaryList> filteredsummary = List();
+  final List<SummaryModel> summary;
+  List<SummaryModel> summary2 = List();
+  List<SummaryModel> filteredsummary = List();
 
   IndustrialCourt(this.summary);
 
@@ -18,9 +19,9 @@ class IndustrialCourt extends StatefulWidget{
 
 class _IndustrialCourt extends State<IndustrialCourt>{
 
-  final List<SummaryList> summary;
-  List<SummaryList> summary2 = List();
-  List<SummaryList> filteredsummary = List();
+  final List<SummaryModel> summary;
+  List<SummaryModel> summary2 = List();
+  List<SummaryModel> filteredsummary = List();
 
   _IndustrialCourt(this.summary);
 

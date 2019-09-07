@@ -33,6 +33,10 @@ dev_dependencies:
   intl: ^0.15.8
   shared_preferences: ^0.5.3+4
   url_launcher: ^5.1.2
+  sqflite: any
+  path_provider: any
+  csv: ^4.0.3
+  simple_permissions: ^0.1.9
 
 
 # For information on the generic Dart part of this file, see the
@@ -70,6 +74,7 @@ flutter:
   - assets/facebook.png
   - assets/twitter.png
   - assets/instagram.png
+  - assets/legalpediadb.db
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

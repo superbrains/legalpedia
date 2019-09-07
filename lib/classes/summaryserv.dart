@@ -9,7 +9,7 @@ class Services{
   static Future<List<SummaryList>> getSummary() async{
 
     try{
-      final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'MaxResultCount': 50, 'SkipCount': 0, 'Title': ''}));
+      final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'MaxResultCount': 870, 'SkipCount': 6000, 'Title': ''}));
       if(response.statusCode==200){
         List<SummaryList> list = parse(response.body);
         return list;
