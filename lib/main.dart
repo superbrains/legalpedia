@@ -22,6 +22,7 @@ import 'package:legalpedia/socialmedia.dart';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:legalpedia/models/summarymodel.dart';
+import 'package:legalpedia/models/ratiosmodel.dart';
 import 'package:legalpedia/utils/database_helper.dart';
 
 
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
   }
 
    List<SummaryModel> summary = List();
+    List<RatioModel> ratios = List();
+
   List<SummaryModel> filteredsummary = List();
 
 
@@ -57,8 +60,24 @@ class MyApp extends StatelessWidget {
       // setState(() {
           this.summary = summaryList;
           
-         this.filteredsummary = summaryList;
-         this.count = filteredsummary.length;
+        // this.filteredsummary = summaryList;
+        // this.count = filteredsummary.length;
+      // });
+      });
+    });
+  }
+
+      updateRatios() async{
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<RatioModel>> ratioListFuture =
+          databaseHelper.getRatioList();
+      ratioListFuture.then((ratioList) {
+      // setState(() {
+          this.ratios = ratioList;
+          
+        // this.filteredsummary = summaryList;
+        // this.count = filteredsummary.length;
       // });
       });
     });
@@ -68,12 +87,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     updateListview();
+    updateRatios();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'LEGALPEDIA',
       routes: <String, WidgetBuilder>{
-        'Judgment': (BuildContext context) => new Judgment(this.summary),
+        'Judgment': (BuildContext context) => new Judgment(this.summary, this.ratios),
         'SubjectMatter': (BuildContext context) => new  SubjectMatter(),
         'LatestJudgements': (BuildContext context) => new  LatestJudgements(),
         'LawsOfFederation': (BuildContext context) => new  LawsOfFederation(),

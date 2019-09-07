@@ -1,33 +1,62 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:legalpedia/classes/summaryclass.dart';
+
 import 'package:intl/intl.dart';
 import 'package:legalpedia/judgementbody.dart';
 import 'package:legalpedia/models/summarymodel.dart';
+import 'package:legalpedia/models/ratiosmodel.dart';
+import 'package:legalpedia/models/coramsmodel.dart';
+
+import 'package:sqflite/sqflite.dart';
+
+import 'package:legalpedia/utils/database_helper.dart';
 
 class JudgementDetail extends StatefulWidget{
 
   final List<SummaryModel> summary;
+   final List<RatioModel> ratio;
+
   final String  suitNo;
   List<SummaryModel> filteredsummary = List();
 
-  JudgementDetail(this.summary, this.suitNo);
+  JudgementDetail(this.summary, this.suitNo, this.ratio);
 //
 
   @override
-  _JudgementDetail createState()=> _JudgementDetail(this.summary, this.suitNo);
+  _JudgementDetail createState()=> _JudgementDetail(this.summary, this.suitNo, this.ratio);
 
 }
 
 class _JudgementDetail extends State<JudgementDetail>{
 
   final List<SummaryModel> summary;
+   final List<RatioModel> ratio;
   final String  suitNo;
   List<SummaryModel> filteredsummary = List();
+   List<RatioModel> filteredRatio = List();
+  List<CoramModel> corams = List();
+  List<CoramModel> filteredcorams = List();
 
-  _JudgementDetail(this.summary, this.suitNo);
+   DatabaseHelper databaseHelper = DatabaseHelper();
 
+  _JudgementDetail(this.summary, this.suitNo, this.ratio);
+
+     updateCoram() async{
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<CoramModel>> coramListFuture =
+          databaseHelper.getCoramList();
+      coramListFuture.then((coramList) {
+       setState(() {
+          this.corams = coramList;
+          
+        // this.filteredsummary = summaryList;
+        // this.count = filteredsummary.length;
+      });
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -37,6 +66,11 @@ class _JudgementDetail extends State<JudgementDetail>{
 
       filteredsummary = summary.where((u)=>
       (u.suitNo.toLowerCase().contains(suitNo.toLowerCase()))).toList();
+
+       filteredRatio = ratio.where((u)=>
+      (u.suitNo.toLowerCase().contains(suitNo.toLowerCase()))).toList();
+
+      updateCoram();
 
      /* var now = new DateTime.now();
       var formatter = new DateFormat('yyyy-MM-dd');
@@ -72,7 +106,10 @@ class _JudgementDetail extends State<JudgementDetail>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    
+      filteredcorams = corams.where((u)=>
+      (u.suitNo.toLowerCase().contains(suitNo.toLowerCase()))).toList();
+
     return new Scaffold(
         appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
           elevation: 7.0,
@@ -161,16 +198,16 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
 
-                             /* Container(
+                             Container(
                                
                                 alignment: Alignment.center,
                                 child:  ListView.builder(
                                    
                                     shrinkWrap: true,
                                      physics: ClampingScrollPhysics(),
-                                    itemCount: filteredsummary[index].corams.length,
+                                    itemCount: filteredcorams.length,
                                     itemBuilder: (BuildContext context, int count){
-                                      return  Text(filteredsummary[index].corams[count].toString()==null?'Not Available':filteredsummary[index].corams[count].toString(), textAlign: TextAlign.center, style: TextStyle(
+                                      return  Text(filteredcorams[count].coram==null?'Not Available':filteredcorams[count].coram, textAlign: TextAlign.center, style: TextStyle(
                                         fontSize: 16.0,
                                         fontFamily: 'Monseratti',
 
@@ -180,7 +217,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),
 
-                              ),*/
+                              ),
                                 SizedBox(height: 20.0,),
 
                                 Text('PARTY TYPE A', textAlign: TextAlign.center, style: TextStyle(
@@ -297,18 +334,18 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10.0,),
-                             /* Column(
+                               Column(
                                 children: <Widget>[
                                   Container(
                                    
                                     child:  ListView.builder(
                                         shrinkWrap: true,
                                         physics: ClampingScrollPhysics(),
-                                        itemCount: filteredsummary[index].ratios.length,
+                                        itemCount: filteredRatio.length,
                                         itemBuilder: (BuildContext context, int count){
                                           return Column(
                                             children: <Widget>[
-                                              Text(filteredsummary[index].ratios[count].heading==null?'Not Available':filteredsummary[index].ratios[count].heading, style: TextStyle(
+                                              Text(filteredRatio[count].heading==null?'Not Available':filteredRatio[count].heading, style: TextStyle(
                                                 fontSize: 14.0,
                                                 fontFamily: 'Monseratti',
                                                 fontWeight: FontWeight.bold
@@ -316,7 +353,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                               ),
                                               ),
                                               SizedBox(height: 5.0,),
-                                              Text(filteredsummary[index].ratios[count].body==null?'Not Available':filteredsummary[index].ratios[count].body, style: TextStyle(
+                                              Text(filteredRatio[count].body==null?'Not Available':filteredRatio[count].body, style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontFamily: 'Monseratti',
 
@@ -333,7 +370,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                   ),
                                 ],
-                              ),*/
+                              ),
 
                                 SizedBox(height: 30.0,),
                                 Text('CASES SITED', textAlign: TextAlign.center, style: TextStyle(

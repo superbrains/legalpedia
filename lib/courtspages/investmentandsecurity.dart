@@ -2,29 +2,33 @@ import 'package:flutter/material.dart';
 
 import 'package:legalpedia/judgementdetails.dart';
 import 'package:legalpedia/models/summarymodel.dart';
+import 'package:legalpedia/models/ratiosmodel.dart';
 
 class InvestmentCourt extends StatefulWidget{
 
   final List<SummaryModel> summary;
+  final List<RatioModel> ratio;
 
   List<SummaryModel> summary2 = List();
   List<SummaryModel> filteredsummary = List();
 
-  InvestmentCourt(this.summary);
+  InvestmentCourt(this.summary, this.ratio);
 
 
   @override
-  _InvestmentCourt createState()=> _InvestmentCourt(this.summary);
+  _InvestmentCourt createState()=> _InvestmentCourt(this.summary, this.ratio);
 
 }
 
 class _InvestmentCourt extends State<InvestmentCourt>{
 
   final List<SummaryModel> summary;
+    final List<RatioModel> ratio;
+
   List<SummaryModel> summary2 = List();
   List<SummaryModel> filteredsummary = List();
 
-  _InvestmentCourt(this.summary);
+  _InvestmentCourt(this.summary, this.ratio);
 
   @override
   void initState() {
@@ -76,7 +80,7 @@ class _InvestmentCourt extends State<InvestmentCourt>{
                     onTap: (){
                     setState(() {
                       Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return JudgementDetail(filteredsummary, filteredsummary[index].suitNo);
+                        return JudgementDetail(filteredsummary, filteredsummary[index].suitNo, ratio);
                       }));
                     });
                     },

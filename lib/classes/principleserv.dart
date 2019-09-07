@@ -9,7 +9,7 @@ class Services{
   static Future<List<PrincipleList>> getPrinciple(int id) async{
 
     try{
-      final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'MaxResultCount': 65, 'SkipCount': 0, 'SubjectMatterId': 65}));
+      final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'MaxResultCount': 65, 'SkipCount': 0, 'SubjectMatterId': id}));
       if(response.statusCode==200){
         List<PrincipleList> list = parse(response.body);
         return list;

@@ -2,28 +2,33 @@ import 'package:flutter/material.dart';
 
 import 'package:legalpedia/judgementdetails.dart';
 import 'package:legalpedia/models/summarymodel.dart';
+import 'package:legalpedia/models/ratiosmodel.dart';
 
 class ShariaCourt extends StatefulWidget{
 
   final List<SummaryModel> summary;
+  final List<RatioModel> ratio;
+
   List<SummaryModel> summary2 = List();
   List<SummaryModel> filteredsummary = List();
 
-  ShariaCourt(this.summary);
+  ShariaCourt(this.summary, this.ratio);
 
 
   @override
-  _ShariaCourt createState()=> _ShariaCourt(this.summary);
+  _ShariaCourt createState()=> _ShariaCourt(this.summary, this.ratio);
 
 }
 
 class _ShariaCourt extends State<ShariaCourt>{
 
   final List<SummaryModel> summary;
+  final List<RatioModel> ratio;
+
   List<SummaryModel> summary2 = List();
   List<SummaryModel> filteredsummary = List();
 
-  _ShariaCourt(this.summary);
+  _ShariaCourt(this.summary, this.ratio);
 
   @override
   void initState() {
@@ -74,7 +79,7 @@ class _ShariaCourt extends State<ShariaCourt>{
                     onTap: (){
                     setState(() {
                       Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return JudgementDetail(filteredsummary, filteredsummary[index].suitNo);
+                        return JudgementDetail(filteredsummary, filteredsummary[index].suitNo, ratio);
                       }));
                     });
                     },

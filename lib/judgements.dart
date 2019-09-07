@@ -18,21 +18,24 @@ import 'package:legalpedia/courtspages/supremecourt.dart' as supremecourt;
 
 import 'package:sqflite/sqflite.dart';
 import 'package:legalpedia/models/summarymodel.dart';
+import 'package:legalpedia/models/ratiosmodel.dart';
 import 'package:legalpedia/utils/database_helper.dart';
 
 
 class Judgment extends StatefulWidget{
   final List<SummaryModel> summary;
-  Judgment(this.summary);
+   final List<RatioModel> ratios;
+  Judgment(this.summary, this.ratios);
   @override
-  _Judgment createState()=> _Judgment(this.summary);
+  _Judgment createState()=> _Judgment(this.summary, this.ratios);
 
 }
 
 class _Judgment extends State<Judgment> with SingleTickerProviderStateMixin{
 
    final List<SummaryModel> summary;
-  _Judgment(this.summary);
+   final List<RatioModel> ratios;
+  _Judgment(this.summary, this.ratios);
 
   List<SummaryModel> filteredsummary = List();
 
@@ -74,10 +77,10 @@ class _Judgment extends State<Judgment> with SingleTickerProviderStateMixin{
   void initState() {
     super.initState();
     controller = new TabController(vsync: this, length: 6);
-    setState(() {
+   /* setState(() {
         this.filteredsummary = summary;
          this.count = filteredsummary.length; 
-    });
+    });*/
     /*new Future.delayed(Duration.zero, () {
       loader();
       updateListview().then((str){
@@ -401,13 +404,13 @@ getCsvArea() async {
     new TabBarView(
       controller: controller,
       children: <Widget>[
-         new supremecourt.SupremeCourt(summary),
-        new appealcourt.CourtofAppeal(summary),
+         new supremecourt.SupremeCourt(summary, ratios),
+        new appealcourt.CourtofAppeal(summary, ratios),
      
-        new fedcourt.FederalCourt(summary),
-         new shariacourt.ShariaCourt(summary),
-        new industcourt.IndustrialCourt(summary),
-        new investcourt.InvestmentCourt(summary),
+        new fedcourt.FederalCourt(summary, ratios),
+         new shariacourt.ShariaCourt(summary, ratios),
+        new industcourt.IndustrialCourt(summary, ratios),
+        new investcourt.InvestmentCourt(summary, ratios),
        
 
       ],
