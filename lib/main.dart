@@ -118,6 +118,7 @@ class MyHomePage extends StatefulWidget {
 
   final name;
   final phone;
+  String searchText;
   MyHomePage(this.name, this.phone);
 
   @override
@@ -271,14 +272,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Material(
                     elevation: 7.0,
                     borderRadius: BorderRadius.circular(10.0),
-                    child: TextFormField(
+                    child: TextField(
+                      
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.search, color: Colors.red, size: 30.0,),
+                        //prefixIcon: Icon(Icons.search, color: Colors.red, size: 30.0, ),
                         contentPadding: EdgeInsets.only(left: 15.0, right: 15.0, top:15.0),
-                        hintText: 'Search'
+                        hintText: 'Search...',
+                        suffixIcon: InkWell(
+                          splashColor: Colors.red,
+                          borderRadius: BorderRadius.circular(10.0),
+                          onTap: (){
+
+                          },
+                          child: Icon(Icons.search),)  
                       ),
+                      
+                      onChanged: (str){
+                        setState(() {
+                           showSearch(context: context, delegate: null);
+                        });
+                         
+                      },
                     ),
+                    
                   ),
 
                 )
