@@ -4,6 +4,7 @@ import 'package:legalpedia/classes/activationserv.dart';
 import 'package:legalpedia/main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:legalpedia/globals.dart' as globals;
 
 
 class Verification extends StatefulWidget{
@@ -70,11 +71,24 @@ class _Verification extends State<Verification> {
               dialog();
               //Show a Dialog Box and ask them to create an account
             }else{
+            
+
+              Services.getinfo(res).then((response){
+   //getinfo  p
+              print(response);
+
+              int daysleft = int.parse(response);
+              var today = new DateTime.now();
+              var expirydate = today.add(new Duration(days: daysleft));
+              globals.expiryDate = expirydate.toString();
 
               SharedPreferences.getInstance().then((ss){
                 ss.setString('Name', name);
                 ss.setString("Phone", phone);
-
+                ss.setString("Expiry", expirydate.toString());
+              });
+             
+                
 
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
                   return MyHomePage(name, phone);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legalpedia/classes/maximclass.dart';
-import 'classes/maximserv.dart';
+import 'classes/maximserv2.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:progress_indicators/progress_indicators.dart';

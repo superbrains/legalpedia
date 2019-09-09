@@ -1,9 +1,11 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:progress_indicators/progress_indicators.dart';
-
-
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_mailer/flutter_mailer.dart';
 
 
 class FeedBack extends StatefulWidget{
@@ -18,9 +20,21 @@ String phone;
 String mac;
 String phoneAct;
 String name;
+String filesel;
+  File _image;
 
-TextEditingController phoneController =  TextEditingController();
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+      
+    });
+  }
+  
+TextEditingController emailController =  TextEditingController();
 TextEditingController nameController =  TextEditingController();
+TextEditingController descrController =  TextEditingController();
 
  List<String> _topics = ['Feature Suggestions', 'Bugs', 'Technical', 'Missing Content', 'Others']; // Option 2
   String _selectedtopic; // Option 2
@@ -57,7 +71,9 @@ Future<bool> dialog(){
   void initState() {
     // TODO: implement initState
     super.initState();
-    
+    setState(() {
+     filesel=''; 
+    });
   }
 
   @override
@@ -103,7 +119,7 @@ Future<bool> dialog(){
                   ),
                   SizedBox(height: 20.0),
                   TextField(
-                    controller: phoneController,
+                    controller: emailController,
                     decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle:  TextStyle(
@@ -140,7 +156,7 @@ Future<bool> dialog(){
                     ),
                   SizedBox(height: 20.0),
                   TextField(
-                  
+                      controller: descrController,
                      keyboardType: TextInputType.multiline,
                      maxLines: 4,
                     decoration: InputDecoration(
@@ -153,39 +169,10 @@ Future<bool> dialog(){
 
                   ),
 
-                  SizedBox(height: 40.0),
-                   Container(
-                    height: 40.0,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(20.0),
-                        shadowColor: Colors.redAccent,
-                        color: Colors.white,
-                        elevation: 7.0,
-                        child: GestureDetector(
-                          onTap: (){
-                            phone= phoneController.text;
-                            mac= phoneController.text;
-                            name = nameController.text;
-                          
-
-                          },
-                          child: Center(
-                            child: Text(
-                              'Click to Attach a File(Optional)',
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'MontSerrat'
-                              ),
-                            ),
-                            
-                          ),
-                          
-                        )
-                    ),
-
-                  ),
-                  SizedBox(height: 40.0),
+                  SizedBox(height: 30.0),
+                  
+                  
+                  SizedBox(height: 20.0),
                   Container(
                     height: 40.0,
                     child: Material(
@@ -194,12 +181,19 @@ Future<bool> dialog(){
                         color: Colors.red,
                         elevation: 7.0,
                         child: GestureDetector(
-                          onTap: (){
-                            phone= phoneController.text;
-                            mac= phoneController.text;
-                            name = nameController.text;
-                          
+                          onTap: () async{
+                           //send mail
+                            final MailOptions mailOptions = MailOptions(
+                            body: 'Dear Sir/Ma,<br/><br/> Below is the feedback from '+ nameController.text +'<br/><br/>' + descrController.text,
+                            subject: _selectedtopic,
+                            recipients: ['support@legalpediaonline.com'],
+                            isHTML: true,
+                            
+                           // attachments: [ 'path/to/image.png', ],
+                            );
 
+                            await FlutterMailer.send(mailOptions);
+                            print('sent email');
                           },
                           child: Center(
                             child: Text(

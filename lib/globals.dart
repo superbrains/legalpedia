@@ -5,3 +5,6 @@ bool isLoggedIn = false;
 
 List<RatioModel> ratios = List();
 List<SummaryModel> summary = List();
+String selectedFormContent='';
+String selectedFormTitle='';
+String expiryDate='';

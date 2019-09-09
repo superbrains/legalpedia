@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:legalpedia/classes/activationclass.dart';
+
 import 'package:legalpedia/verification.dart';
 import 'package:legalpedia/classes/activationserv.dart';
 import 'package:legalpedia/main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info/device_info.dart';
-
+import 'package:legalpedia/globals.dart' as globals;
+import 'package:intl/intl.dart';
 
 class Activation extends StatefulWidget{
   @override
@@ -116,13 +117,37 @@ return identifier;
         name =ss.getString('Name') ?? 'null';
         phone =ss.getString('Phone') ?? 'null';
 
-         if(name!='null'){
+        var expiry =  ss.getString('Expiry') ??  new DateTime.now().toString();
+
+        var formatter = new DateFormat('yyyy-MM-dd');
+          String formatted = formatter.format(DateTime.parse(expiry));
+
+        globals.expiryDate = formatted;
+
+        var expiryDate = DateTime.parse(expiry);
+        var today = new DateTime.now();
+
+        final difference = expiryDate.difference(today).inDays;
+
+        print(difference);
+
+        if(difference<1){
+
+
+          return;
+
+          
+        }else{
+          if(name!='null'){
 
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
           return MyHomePage(name,phone);
         }));
 
       }
+        }
+
+        
 
       });
     });

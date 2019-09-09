@@ -5,17 +5,17 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:legalpedia/main.dart';
 
+import 'package:legalpedia/globals.dart' as globals;
 
-class Maxims extends StatefulWidget{
+class FormsContent extends StatefulWidget{
 
   @override
-  _Maxims createState()=> _Maxims();
+  _FormsContent createState()=> _FormsContent();
 
 }
 
-class _Maxims extends State<Maxims>{
+class _FormsContent extends State<FormsContent>{
 
   List<MaximList> maxim = List();
   List<MaximList> filteredmaxims = List();
@@ -83,31 +83,7 @@ Future<bool> dialog(str){
 }
 
 
-  @override
-  void initState() {
-    super.initState();
-    new Future.delayed(Duration.zero, ()  async{
-
-        var res = await checkconnectivity();
-      if (res=="Connected"){
-         loader();
-
-     
-      Services.getMaxims().then((maximsFromServer) {
-        setState(() {
-          maxim = maximsFromServer;
-          filteredmaxims = maxim;
-          Navigator.pop(context);
-         
-        });
-      });
-       }else{
-        dialog('Please check your internet connectivity. Internet connection is required to access this content');
-      }
-    });
-  }
-
-
+  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -115,7 +91,7 @@ Future<bool> dialog(str){
       appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
         elevation: 7.0,
         actionsIconTheme: new IconThemeData(color:  Colors.white),
-        title: Text('Legal Maxims', style: TextStyle(
+        title: Text('Forms Content', style: TextStyle(
             fontWeight:  FontWeight.bold,
             fontSize: 16.0,
             fontFamily: 'Monseratti',
@@ -131,55 +107,21 @@ Future<bool> dialog(str){
 
       ),
       body:
-      Column(
+      ListView(
+        padding: EdgeInsets.all(15.0),
         children: <Widget>[
-          TextField(
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(10.0),
-                hintText: 'Search Maxims...'
-            ),
-            onChanged: (string){
 
-              setState(() {
-                filteredmaxims = maxim.where((u)=>
-                (u.title.toLowerCase().contains(string.toLowerCase()) ||
-                    u.content.toLowerCase().contains(string.toLowerCase()))).toList();
-              });
+          SizedBox(height: 20,),
+          Text(globals.selectedFormTitle, style: TextStyle(
+            color: Colors.red,
+            fontSize: 18,
+            fontFamily: 'Monseratti',
+            fontWeight: FontWeight.bold
+          ),),
 
-
-            },
-          ),
-          Expanded(
-            child: ListView.builder(
-                padding: EdgeInsets.all(10.0),
-                itemCount:  filteredmaxims.length,
-                itemBuilder: (BuildContext context, int index){
-                  return InkWell(
-                    splashColor: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(10.0),
-                    onTap: (){
-                      setState(() {
-
-                      });
-                    },
-
-                    child:  Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(filteredmaxims[index].title, style: TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'Monseratti',
-                                fontWeight: FontWeight.bold
-
-                            ),),
-                            SizedBox(height: 10.0),
-
-                            Html(
-                              data: filteredmaxims[index].content,
+           SizedBox(height: 20,),
+          Html(
+                              data: globals.selectedFormContent,
                               customTextAlign: (dom.Node node) {
                                 if (node is dom.Element) {
                                   switch (node.localName) {
@@ -193,7 +135,7 @@ Future<bool> dialog(str){
                                 if (node is dom.Element) {
                                   switch (node.localName) {
                                     case "p":
-                                      return baseStyle.merge(TextStyle(height: 2, fontSize: 14, fontFamily: 'Monseratti'));
+                                      return baseStyle.merge(TextStyle(height: 2, fontSize: 16, fontFamily: 'Monseratti'));
                                   }
                                 }
                                 return baseStyle;
@@ -209,16 +151,6 @@ Future<bool> dialog(str){
                                   return null;
                                 },*/
                             ),
-
-                          ],
-                        ),
-                      ),
-                    )
-                    ,
-                  );
-
-                }),
-          )
         ],
       ),
     );

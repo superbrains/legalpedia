@@ -25,6 +25,8 @@ import 'package:legalpedia/models/summarymodel.dart';
 import 'package:legalpedia/models/ratiosmodel.dart';
 import 'package:legalpedia/utils/database_helper.dart';
 import 'searchresult.dart';
+import 'package:legalpedia/dictionary.dart';
+import 'package:legalpedia/maxims.dart';
 
 
 void main() => runApp(MyApp());
@@ -111,6 +113,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.red,
       ),
+      //Activation()
       home: Activation(),
     );
   }
@@ -144,6 +147,8 @@ String searchText;
   Widget build(BuildContext context) {
     ratios = globals.ratios;
     summary = globals.summary;
+
+   
     return Scaffold(
       
     appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.red),
@@ -191,18 +196,27 @@ String searchText;
 
                   ),
                   SizedBox(height: 10),
-                  Text(name,
+                  Text(name,textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25.0,
                     fontFamily: 'Monseratti',
                     fontWeight: FontWeight.bold
                   ),),
                   SizedBox(height: 5),
-                  Text(phone,
+                  Text(phone,textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 12.0,
                         fontFamily: 'Monseratti',
-                        fontStyle: FontStyle.italic
+                        fontStyle: FontStyle.normal
+                    ),),
+                     SizedBox(height: 10),
+                    Text('Your license will expire by ' +  globals.expiryDate, textAlign: TextAlign.center,
+                    
+                    style: TextStyle(
+                        fontSize: 12.0,
+                        fontFamily: 'Monseratti',
+                        fontStyle: FontStyle.italic,
+                        color: Colors.red
                     ),)
 
 

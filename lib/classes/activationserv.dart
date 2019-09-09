@@ -45,7 +45,7 @@ class Services{
     try{
       final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'key': result}));
       if(response.statusCode==200){
-        String list = parseSuccess(response.body);
+        String list = parseGetdays(response.body);
         return list;
       }else {
         String list = parseError(response.body);
@@ -55,6 +55,12 @@ class Services{
     catch(e){
       return 'Error: $e.toString()';
     }
+  }
+
+   static String parseGetdays(String responseBody){
+
+    final parsed = json.decode(responseBody)["result"]["licensedDays"];
+    return parsed.toString();//.map<PhoneActivation>((json)=> PhoneActivation.fromJson(json)).toList();
   }
   static String parseSuccess(String responseBody){
 
