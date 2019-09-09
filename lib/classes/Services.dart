@@ -12,6 +12,7 @@ class Services{
       final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'MaxResultCount': 65, 'SkipCount': 0}));
       if(response.statusCode==200){
         List<SubjectMatters> list = parseSubMatters(response.body);
+        //list.sort();
         return list;
       }else {
         throw Exception("Error");

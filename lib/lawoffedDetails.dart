@@ -123,7 +123,7 @@ body:    Center(
                                 SizedBox(height: 10.0),
                                 Text(filteredlaws.result.title==null?'Not Available': filteredlaws.result.title, textAlign: TextAlign.center, style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16.0,
+                                    fontSize: 18.0,
                                     fontFamily: 'Monseratti'
 
                                 ),),
@@ -145,7 +145,7 @@ body:    Center(
                                 ),),
                                 SizedBox(height: 40.0),
                                 Text('DESCRIPTION', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -153,13 +153,13 @@ body:    Center(
                                 ),),
                                 SizedBox(height: 10.0),
                                 Text(filteredlaws.result.descr==null?'Not Available:':filteredlaws.result.descr, textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti'
 
                                 ),),
                                 SizedBox(height: 30.0),
                                 Text('SCHEDULES', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -169,13 +169,14 @@ body:    Center(
                                 Column(
                                   children: <Widget>[
                                     ListView.builder(
+                                       physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
                                         itemCount: filteredlaws.result.schedules.length,
                                         itemBuilder: (BuildContext context, int count){
                                           return Column(
                                             children: <Widget>[
                                               Text(filteredlaws.result.schedules[count].schedHeader==null?'Not Available':filteredlaws.result.schedules[count].schedHeader, style: TextStyle(
-                                                  fontSize: 12.0,
+                                                  fontSize: 14.0,
                                                   fontFamily: 'Monseratti',
                                                   fontWeight: FontWeight.bold
 
@@ -183,7 +184,7 @@ body:    Center(
                                               ),
                                               SizedBox(height: 5.0,),
                                               Text(filteredlaws.result.schedules[count].schedBody==null?'Not Available':filteredlaws.result.schedules[count].schedBody, style: TextStyle(
-                                                fontSize: 12.0,
+                                                fontSize: 14.0,
                                                 fontFamily: 'Monseratti',
 
                                               ),
@@ -201,7 +202,7 @@ body:    Center(
                                 SizedBox(height: 20.0,),
 
                                 Text('PARTS', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 14.0,
+                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
@@ -212,13 +213,14 @@ body:    Center(
                                     Container(
 
                                       child:  ListView.builder(
+                                         physics: ClampingScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: filteredlaws.result.parts.length,
                                           itemBuilder: (BuildContext context, int count){
                                             return Column(
                                               children: <Widget>[
                                                 Text(filteredlaws.result.parts[count].partHeader==null?'Not Available':filteredlaws.result.parts[count].partHeader, style: TextStyle(
-                                                    fontSize: 13.0,
+                                                    fontSize: 14.0,
                                                     fontFamily: 'Monseratti',
                                                     fontWeight: FontWeight.bold,
                                                       color: Colors.green
@@ -228,13 +230,14 @@ body:    Center(
                                                 SizedBox(height: 10.0,),
 
                                                 ListView.builder(
+                                                   physics: ClampingScrollPhysics(),
                                                     shrinkWrap: true,
                                                     itemCount: filteredlaws.result.parts[count].sections.length,
                                                     itemBuilder: (BuildContext context, int count2){
                                                       return Column(
                                                         children: <Widget>[
                                                           Text(filteredlaws.result.parts[count].sections[count2].sectionHeader==null?'Not Available':filteredlaws.result.parts[count].sections[count2].sectionHeader, style: TextStyle(
-                                                              fontSize: 13.0,
+                                                              fontSize: 14.0,
                                                               fontFamily: 'Monseratti',
                                                               fontWeight: FontWeight.bold,
                                                               color: Colors.red
@@ -243,7 +246,7 @@ body:    Center(
 
                                                           SizedBox(height: 10.0,),
                                                           Text(filteredlaws.result.parts[count].sections[count2].sectionBody==null?'Not Available':filteredlaws.result.parts[count].sections[count2].sectionBody, style: TextStyle(
-                                                              fontSize: 13.0,
+                                                              fontSize: 15.0,
                                                               fontFamily: 'Monseratti',
 
 

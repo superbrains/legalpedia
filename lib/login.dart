@@ -6,7 +6,7 @@ import 'package:legalpedia/classes/activationserv.dart';
 import 'package:legalpedia/main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_udid/flutter_udid.dart';
 
 
 class Activation extends StatefulWidget{
@@ -80,9 +80,11 @@ Future<bool> dialog(str){
 
   @override
   void initState() {
+     
     // TODO: implement initState
     super.initState();
     setState(() {
+    
       SharedPreferences.getInstance().then((ss){
 
         name =ss.getString('Name') ?? 'null';
@@ -154,9 +156,10 @@ Future<bool> dialog(str){
                         color: Colors.red,
                         elevation: 7.0,
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: ()async{
                             phone= phoneController.text;
-                            mac= phoneController.text;
+                           // mac= phoneController.text;
+                            mac = await FlutterUdid.consistentUdid;
                             name = nameController.text;
                             getOtp();
 

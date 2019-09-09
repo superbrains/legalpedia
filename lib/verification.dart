@@ -120,7 +120,7 @@ class _Verification extends State<Verification> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
 
-                          Text("Please enter the OTP sent to your registered phone and email. If you don's receive it in five(5) minutes, call our support line", textAlign: TextAlign.center, style: TextStyle(
+                          Text("Please enter the OTP sent to your registered phone and email. If you don's receive it in fifteen(15) minutes, call our support line", textAlign: TextAlign.center, style: TextStyle(
                             fontFamily: 'Monserrati',
                             fontSize: 15,
 

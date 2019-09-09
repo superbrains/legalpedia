@@ -16,7 +16,7 @@ import 'package:legalpedia/foreign.dart';
 import 'package:legalpedia/states.dart';
 import 'package:legalpedia/login.dart';
 import 'package:legalpedia/feedback.dart';
-//
+import 'package:legalpedia/globals.dart' as globals;
 import 'package:legalpedia/socialmedia.dart';
 
 
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
       summaryListFuture.then((summaryList) {
       // setState(() {
           this.summary = summaryList;
-          
+          globals.summary = summaryList;
         // this.filteredsummary = summaryList;
         // this.count = filteredsummary.length;
       // });
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
       ratioListFuture.then((ratioList) {
       // setState(() {
           this.ratios = ratioList;
-          
+          globals.ratios = ratioList;
         // this.filteredsummary = summaryList;
         // this.count = filteredsummary.length;
       // });
@@ -139,42 +139,11 @@ String searchText;
       List<RatioModel> ratios = List();
        List<SummaryModel> summary = List();
 
-   DatabaseHelper databaseHelper = DatabaseHelper();
-
-         updateRatios() async{
-    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
-    dbFuture.then((database) {
-      Future<List<RatioModel>> ratioListFuture =
-          databaseHelper.getRatioList();
-      ratioListFuture.then((ratioList) {
-     
-          this.ratios = ratioList;
-          
-      
-      });
-    });
-  }
-
-    updateListview() async{
-    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
-    dbFuture.then((database) {
-      Future<List<SummaryModel>> summaryListFuture =
-          databaseHelper.getSummaryList();
-      summaryListFuture.then((summaryList) {
-      // setState(() {
-          this.summary = summaryList;
-          
-        // this.filteredsummary = summaryList;
-        // this.count = filteredsummary.length;
-      // });
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    updateRatios();
-    updateListview();
+    ratios = globals.ratios;
+    summary = globals.summary;
     return Scaffold(
       
     appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.red),
