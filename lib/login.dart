@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:legalpedia/classes/activationclass.dart';
@@ -6,7 +8,7 @@ import 'package:legalpedia/classes/activationserv.dart';
 import 'package:legalpedia/main.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_udid/flutter_udid.dart';
+import 'package:device_info/device_info.dart';
 
 
 class Activation extends StatefulWidget{
@@ -77,6 +79,30 @@ Future<bool> dialog(str){
     });
   }
 
+ static Future<String> getDeviceDetails() async {
+    String deviceName;
+    String deviceVersion;
+    String identifier;
+    final DeviceInfoPlugin deviceInfoPlugin = new DeviceInfoPlugin();
+    try {
+      if (Platform.isAndroid) {
+        var build = await deviceInfoPlugin.androidInfo;
+        deviceName = build.model;
+        deviceVersion = build.version.toString();
+        identifier = build.androidId;  //UUID for Android
+      } else if (Platform.isIOS) {
+        var data = await deviceInfoPlugin.iosInfo;
+        deviceName = data.name;
+        deviceVersion = data.systemVersion;
+        identifier = data.identifierForVendor;  //UUID for iOS
+      }
+    } on Exception {
+      print('Failed to get platform version');
+    }
+
+//if (!mounted) return;
+return identifier;
+}
 
   @override
   void initState() {
@@ -159,7 +185,7 @@ Future<bool> dialog(str){
                           onTap: ()async{
                             phone= phoneController.text;
                            // mac= phoneController.text;
-                            mac = await FlutterUdid.consistentUdid;
+                            mac = await getDeviceDetails();
                             print(mac);
                             name = nameController.text;
                             getOtp();
