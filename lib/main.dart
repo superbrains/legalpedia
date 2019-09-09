@@ -24,6 +24,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:legalpedia/models/summarymodel.dart';
 import 'package:legalpedia/models/ratiosmodel.dart';
 import 'package:legalpedia/utils/database_helper.dart';
+import 'searchresult.dart';
 
 
 void main() => runApp(MyApp());
@@ -104,6 +105,7 @@ class MyApp extends StatelessWidget {
         'Dictionary': (BuildContext context) => new  Dictionary(),
         'Maxims': (BuildContext context) => new  Maxims(),
         'Foreign': (BuildContext context) => new  Foreign(),
+       // 'SearchResult': (BuildContext context) => new  SearchResult(this.ratios),
       },
       theme: ThemeData(
 
@@ -118,7 +120,7 @@ class MyHomePage extends StatefulWidget {
 
   final name;
   final phone;
-  String searchText;
+
   MyHomePage(this.name, this.phone);
 
   @override
@@ -129,13 +131,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final name;
   final phone;
+  TextEditingController searchController = TextEditingController();
   _MyHomePageState(this.name, this.phone);
 
+String searchText;
    
+      List<RatioModel> ratios = List();
+       List<SummaryModel> summary = List();
+
+   DatabaseHelper databaseHelper = DatabaseHelper();
+
+         updateRatios() async{
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<RatioModel>> ratioListFuture =
+          databaseHelper.getRatioList();
+      ratioListFuture.then((ratioList) {
+     
+          this.ratios = ratioList;
+          
+      
+      });
+    });
+  }
+
+    updateListview() async{
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<SummaryModel>> summaryListFuture =
+          databaseHelper.getSummaryList();
+      summaryListFuture.then((summaryList) {
+      // setState(() {
+          this.summary = summaryList;
+          
+        // this.filteredsummary = summaryList;
+        // this.count = filteredsummary.length;
+      // });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-
+    updateRatios();
+    updateListview();
     return Scaffold(
       
     appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.red),
@@ -273,7 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     elevation: 7.0,
                     borderRadius: BorderRadius.circular(10.0),
                     child: TextField(
-                      
+                      controller: searchController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         //prefixIcon: Icon(Icons.search, color: Colors.red, size: 30.0, ),
@@ -284,16 +323,40 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadius.circular(10.0),
                           onTap: (){
 
+                               // Navigator.of(context).pushNamed('SearchResult');
+                               List<RatioModel> filteredRatio = List();
+                             
+                              setState(() {
+                               // print(searchController.text);
+                                
+                               // print(ratios.length);
+
+                                ratios.removeWhere((item) => item.heading == null);
+                                ratios.removeWhere((item) => item.suitNo == null);
+                                ratios.removeWhere((item) => item.body == null);
+
+                                
+                                 filteredRatio = ratios.where((u)=>
+                                  (u.heading.toLowerCase().contains(searchController.text.toLowerCase()))).toList();
+                                
+                               // print(filteredRatio.length);
+                              });
+                            
+                             Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return SearchResult(filteredRatio,searchController.text, summary);
+                          }));
+                           
                           },
                           child: Icon(Icons.search),)  
-                      ),
+                        ),
                       
-                      onChanged: (str){
+                     /* onChanged: (str){
                         setState(() {
-                           showSearch(context: context, delegate: null);
+                          searchController.text = str;
+                          searchText = str;
                         });
                          
-                      },
+                      },*/
                     ),
                     
                   ),
