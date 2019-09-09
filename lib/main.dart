@@ -1,5 +1,5 @@
 import 'dart:ui' as prefix1;
-
+import 'package:legalpedia/about.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:legalpedia/switchboard.dart';
@@ -228,6 +228,9 @@ String searchText;
 
                   }),
                   CustomListTile(Icons.account_box, 'About Legapedia', ()=>{
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return About();
+                      }))
 
                   }),
                   CustomListTile(Icons.feedback, 'Feedback', ()=>{

@@ -160,6 +160,7 @@ Future<bool> dialog(str){
                             phone= phoneController.text;
                            // mac= phoneController.text;
                             mac = await FlutterUdid.consistentUdid;
+                            print(mac);
                             name = nameController.text;
                             getOtp();
 
