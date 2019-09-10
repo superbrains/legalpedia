@@ -176,14 +176,8 @@ class _Rules extends State<Rules>{
                                           fontFamily: 'Monseratti'
 
                                       ),),
-                                      SizedBox(height: 30.0),
-                                      
-                                      Text(filteredrules.result.items[index].type==null?'Not Available': filteredrules.result.items[index].type, textAlign: TextAlign.center, style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14.0,
-                                          fontFamily: 'Monseratti'
-
-                                      ),),
+                                     
+                                     
                                       SizedBox(height: 30.0),
                                       Text('CONTENT', textAlign: TextAlign.center, style: TextStyle(
                                           fontWeight: FontWeight.bold,
