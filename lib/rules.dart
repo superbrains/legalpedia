@@ -146,21 +146,7 @@ class _Rules extends State<Rules>{
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: <Widget>[
                                       SizedBox(height: 10.0),
-                                      Text('STATE NAME', textAlign: TextAlign.center, style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
-                                          fontFamily: 'Monseratti',
-                                          color: Colors.red
-
-                                      ),),
-                                      SizedBox(height: 10.0),
-                                      Text(filteredrules.result.items[index].name==null?'Not Available': filteredrules.result.items[index].name, textAlign: TextAlign.center, style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14.0,
-                                          fontFamily: 'Monseratti'
-
-                                      ),),
-                                      SizedBox(height: 30.0),
+                                                                           
                                       Text('TITLE', textAlign: TextAlign.center, style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.0,
@@ -191,14 +177,7 @@ class _Rules extends State<Rules>{
 
                                       ),),
                                       SizedBox(height: 30.0),
-                                      Text('RULE TYPE', textAlign: TextAlign.center, style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
-                                          fontFamily: 'Monseratti',
-                                          color: Colors.red
-
-                                      ),),
-                                      SizedBox(height: 10.0),
+                                      
                                       Text(filteredrules.result.items[index].type==null?'Not Available': filteredrules.result.items[index].type, textAlign: TextAlign.center, style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14.0,

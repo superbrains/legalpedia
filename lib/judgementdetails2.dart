@@ -176,21 +176,16 @@ class _JudgementDetail extends State<JudgementDetail>{
                               ),
                                 SizedBox(height: 20.0,),
 
-                                Text('PARTY TYPE A', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 16.0,
+                                
+                                Text(filteredsummary[index].partyAType==null?'Not Available':filteredsummary[index].partyAType, textAlign: TextAlign.center, style : TextStyle(
+                                 fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
-
-                                ),),
-                                Text(filteredsummary[index].partyAType==null?'Not Available':filteredsummary[index].partyAType, textAlign: TextAlign.center, style : TextStyle(
-                                fontSize: 16.0,
-                                fontFamily: 'Monseratti',
-
                                 ),),
                                 SizedBox(height: 20.0),
 
-                                Text('PARTY NAME', textAlign: TextAlign.center, style: TextStyle(
+                                Text('NAME', textAlign: TextAlign.center, style: TextStyle(
                                     fontSize: 14.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
@@ -205,21 +200,16 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 SizedBox(height: 20.0,),
 
-                                Text('PARTY TYPE B', textAlign: TextAlign.center, style: TextStyle(
-                                    fontSize: 16.0,
+                              
+                                Text(filteredsummary[index].partyBType==null?'Not Available':filteredsummary[index].partyBType, textAlign: TextAlign.center, style : TextStyle(
+                                   fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.redAccent
-
-                                ),),
-                                Text(filteredsummary[index].partyBType==null?'Not Available':filteredsummary[index].partyBType, textAlign: TextAlign.center, style : TextStyle(
-                                  fontSize: 16.0,
-                                  fontFamily: 'Monseratti',
-
                                 ),),
                                 SizedBox(height: 20.0),
 
-                                Text('PARTY NAME', textAlign: TextAlign.center, style: TextStyle(
+                                Text('NAME', textAlign: TextAlign.center, style: TextStyle(
                                     fontSize: 14.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
