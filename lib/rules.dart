@@ -134,7 +134,7 @@ class _Rules extends State<Rules>{
                         },
                       ),*/
                       Expanded(
-                        child: ListView.builder(
+                        child: filteredrules.result.items.length <1? Center(child: Text('No Information Found at the moment', style: TextStyle(fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),)) : ListView.builder(
                             padding: EdgeInsets.all(5.0),
                             itemCount:filteredrules.result.items.length,
                             itemBuilder: (BuildContext context, int index){

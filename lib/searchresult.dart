@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:legalpedia/judgementdetails.dart';
 import 'package:legalpedia/models/summarymodel.dart';
 import 'package:legalpedia/models/ratiosmodel.dart';
+import 'package:intl/intl.dart';
+import 'package:legalpedia/globals.dart' as globals;
 
 class SearchResult extends StatefulWidget{
 
@@ -30,6 +32,7 @@ final String searchText;
   
   List<RatioModel> filteredRatio = List();
   List<SummaryModel> summary = List();
+   List<SummaryModel> filteredsummary = List();
 
   _SearchResult(this.ratio, this.searchText, this.summary);
 
@@ -47,6 +50,46 @@ final String searchText;
 
 
   }
+String getTitle(str){
+      filteredsummary = globals.summary.where((u)=>
+      (u.suitNo.toLowerCase().contains(str.toLowerCase()))).toList();
+     
+
+      if(filteredsummary.length>0){
+         return filteredsummary[0].title;
+      }else{
+         return 'Not Available';
+      }
+     
+
+}
+
+  String getDate(str){
+    
+     filteredsummary = globals.summary.where((u)=>
+      (u.suitNo.toLowerCase().contains(str.toLowerCase()))).toList();
+      var datestr;
+       if(filteredsummary.length>0){
+         datestr= filteredsummary[0].judgementDate;
+      }else{
+        datestr= 'Not Available';
+      }
+
+      
+
+    try{
+    var parsedDate = DateTime.parse(datestr);
+
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(parsedDate);
+
+    return formatted;
+    } 
+    catch(e){
+      return 'Invalid Date';
+    }
+  }
+
 
 
   @override
@@ -133,7 +176,21 @@ appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
                              SizedBox(height: 10.0),
                               Text('----------------------------------------------------'),
                               SizedBox(height: 10.0),
-                            Text(filteredRatio[index].suitNo==null ||  filteredRatio[index].suitNo.toString().toUpperCase()=='NIL|'? 'None': filteredRatio[index].suitNo, style: TextStyle(
+                               Text('Judgement Title:', style: TextStyle(
+                                fontSize: 16.0,
+                                fontFamily: 'Monseratti',
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold
+
+                            ),),
+                             SizedBox(height: 5.0),
+                            Text( getTitle(filteredRatio[index].suitNo) ==null ||  getTitle(filteredRatio[index].suitNo).toString().toUpperCase()=='NIL|'? 'Not available': getTitle(filteredRatio[index].suitNo), style: TextStyle(
+                                fontSize: 16.0,
+                                fontFamily: 'Monseratti',
+                               
+                            ),),
+                              SizedBox(height: 10.0),
+                            Text(getDate(filteredRatio[index].suitNo)==null ||  getDate(filteredRatio[index].suitNo).toString().toUpperCase()=='NIL|'? 'Not available': getDate(filteredRatio[index].suitNo), style: TextStyle(
                                 fontSize: 15.0,
                                 fontFamily: 'Monseratti',
                                 color: Colors.red

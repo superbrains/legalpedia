@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:legalpedia/judgementdetails.dart';
 import 'package:legalpedia/models/summarymodel.dart';
 import 'package:legalpedia/models/ratiosmodel.dart';
+import 'package:intl/intl.dart';
 
 class SupremeCourt extends StatefulWidget{
 
@@ -46,6 +47,21 @@ class _SupremeCourt extends State<SupremeCourt>{
   }
 
 
+String getDate(str){
+
+    try{
+    var parsedDate = DateTime.parse(str);
+
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formatted = formatter.format(parsedDate);
+
+    return formatted;
+    } 
+    catch(e){
+      return 'Invalid Date';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -57,7 +73,7 @@ class _SupremeCourt extends State<SupremeCourt>{
             TextField(
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(10.0),
-                  hintText: 'Search Judgements (Supreme Court)'
+                  hintText: 'Filter by title, year or suit number'
               ),
               onChanged: (string){
                 setState(() {
@@ -96,7 +112,7 @@ class _SupremeCourt extends State<SupremeCourt>{
 
                             ),),
                             SizedBox(height: 10.0),
-                            Text(filteredsummary[index].suitNo==null ||  filteredsummary[index].suitNo.toString().toUpperCase()=='NIL|'? 'None': filteredsummary[index].suitNo, style: TextStyle(
+                            Text(filteredsummary[index].judgementDate==null ||  filteredsummary[index].judgementDate.toString().toUpperCase()=='NIL|'? 'None': getDate(filteredsummary[index].judgementDate.toString()) , style: TextStyle(
                                 fontSize: 10.0,
                                 fontFamily: 'Monseratti',
                                 color: Colors.grey

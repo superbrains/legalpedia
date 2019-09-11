@@ -147,14 +147,14 @@ class _JudgementDetail extends State<JudgementDetail>{
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 SizedBox(height: 10.0),
-                                Text(filteredsummary[index].title==null?'Not Available': filteredsummary[index].title, textAlign: TextAlign.center, style: TextStyle(
+                                Text(filteredsummary[index].title==null || filteredsummary[index].title=='null'?'Not Available': filteredsummary[index].title, textAlign: TextAlign.center, style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
                                     fontFamily: 'Monseratti'
 
                                 ),),
                                 SizedBox(height: 20.0),
-                                Text(filteredsummary[index].legalpediaCitation==null?'None':filteredsummary[index].legalpediaCitation, textAlign: TextAlign.center, style: TextStyle(
+                                Text(filteredsummary[index].legalpediaCitation==null||filteredsummary[index].legalpediaCitation=='null'?'Not Available':filteredsummary[index].legalpediaCitation, textAlign: TextAlign.center, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
                                   fontWeight: FontWeight.bold,
@@ -162,14 +162,14 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
 
                                 SizedBox(height: 20.0),
-                                Text(filteredsummary[index].court==null?'Not Available': filteredsummary[index].court, textAlign: TextAlign.center, style: TextStyle(
+                                Text(filteredsummary[index].court==null||filteredsummary[index].court=='null'?'Not Available': filteredsummary[index].court, textAlign: TextAlign.center, style: TextStyle(
                                     fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
 
                                 ),),
 
-                                Text( filteredsummary[index].judgementDate==null?'Not Available': getDate(filteredsummary[index].judgementDate) , textAlign: TextAlign.center, style: TextStyle(
+                                Text( filteredsummary[index].judgementDate==null||filteredsummary[index].judgementDate=='null'?'Not Available': getDate(filteredsummary[index].judgementDate) , textAlign: TextAlign.center, style: TextStyle(
                                   fontSize: 14.0,
                                   fontFamily: 'Monseratti',
 
@@ -183,7 +183,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                   color: Colors.redAccent
 
                                 ),),
-                                Text(filteredsummary[index].suitNo==null?'Not Available:':filteredsummary[index].suitNo, textAlign: TextAlign.center, style: TextStyle(
+                                Text(filteredsummary[index].suitNo==null||filteredsummary[index].suitNo=='null'?'Not Available:':filteredsummary[index].suitNo, textAlign: TextAlign.center, style: TextStyle(
                                   fontSize: 14.0,
                                   fontFamily: 'Monseratti',
                                   fontWeight: FontWeight.bold
@@ -207,7 +207,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                      physics: ClampingScrollPhysics(),
                                     itemCount: filteredcorams.length,
                                     itemBuilder: (BuildContext context, int count){
-                                      return  Text(filteredcorams[count].coram==null?'Not Available':filteredcorams[count].coram, textAlign: TextAlign.center, style: TextStyle(
+                                      return  Text(filteredcorams[count].coram==null||filteredcorams[count].coram=='null'?'Not Available':filteredcorams[count].coram, textAlign: TextAlign.center, style: TextStyle(
                                         fontSize: 16.0,
                                         fontFamily: 'Monseratti',
 
@@ -221,7 +221,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 20.0,),
 
                                
-                                Text(filteredsummary[index].partyAType==null?'Not Available':filteredsummary[index].partyAType, textAlign: TextAlign.center, style : TextStyle(
+                                Text(filteredsummary[index].partyAType==null||filteredsummary[index].partyAType=='null'?'Not Available':filteredsummary[index].partyAType, textAlign: TextAlign.center, style : TextStyle(
                                  fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
@@ -237,7 +237,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                     color: Colors.green
 
                                 ),),
-                                Text(filteredsummary[index].partiesA==null?'Not Available':filteredsummary[index].partiesA, textAlign: TextAlign.center, style : TextStyle(
+                                Text(filteredsummary[index].partiesA==null||filteredsummary[index].partiesA=='null'?'Not Available':filteredsummary[index].partiesA, textAlign: TextAlign.center, style : TextStyle(
                                   fontSize: 14.0,
                                   fontFamily: 'Monseratti',
 
@@ -246,7 +246,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 SizedBox(height: 20.0,),
 
                              
-                                Text(filteredsummary[index].partyBType==null?'Not Available':filteredsummary[index].partyBType, textAlign: TextAlign.center, style : TextStyle(
+                                Text(filteredsummary[index].partyBType==null||filteredsummary[index].partyBType=='null'?'Not Available':filteredsummary[index].partyBType, textAlign: TextAlign.center, style : TextStyle(
                                    fontSize: 16.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
@@ -261,7 +261,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                     color: Colors.green
 
                                 ),),
-                                Text(filteredsummary[index].partiesB==null?'Not Availble':filteredsummary[index].partiesB, textAlign: TextAlign.center, style : TextStyle(
+                                Text(filteredsummary[index].partiesB==null||filteredsummary[index].partiesB=='null'?'Not Availble':filteredsummary[index].partiesB, textAlign: TextAlign.center, style : TextStyle(
                                   fontSize: 14.0,
                                   fontFamily: 'Monseratti',
 
@@ -277,7 +277,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10,),
-                                Text(filteredsummary[index].summaryOfFacts==null?'Not Available':filteredsummary[index].summaryOfFacts, textAlign: TextAlign.left, style: TextStyle(
+                                Text(filteredsummary[index].summaryOfFacts==null||filteredsummary[index].partiesB=='null'?'Not Available':filteredsummary[index].summaryOfFacts, textAlign: TextAlign.left, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
                                  
@@ -293,7 +293,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10,),
-                                Text(filteredsummary[index].held==null?'Not Available':filteredsummary[index].held , textAlign: TextAlign.left, style: TextStyle(
+                                Text(filteredsummary[index].held==null||filteredsummary[index].held=='null'?'Not Available':filteredsummary[index].held , textAlign: TextAlign.left, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
@@ -309,7 +309,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10,),
-                                Text(filteredsummary[index].issues==null?'Not Available':filteredsummary[index].issues, textAlign: TextAlign.left, style: TextStyle(
+                                Text(filteredsummary[index].issues==null||filteredsummary[index].issues=='null'?'Not Available':filteredsummary[index].issues, textAlign: TextAlign.left, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
@@ -336,7 +336,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                         itemBuilder: (BuildContext context, int count){
                                           return Column(
                                             children: <Widget>[
-                                              Text(filteredRatio[count].heading==null?'Not Available':filteredRatio[count].heading, style: TextStyle(
+                                              Text(filteredRatio[count].heading==null||filteredRatio[count].heading=='null'?'Not Available':filteredRatio[count].heading, style: TextStyle(
                                                 fontSize: 14.0,
                                                 fontFamily: 'Monseratti',
                                                 fontWeight: FontWeight.bold
@@ -344,7 +344,7 @@ class _JudgementDetail extends State<JudgementDetail>{
                                               ),
                                               ),
                                               SizedBox(height: 5.0,),
-                                              Text(filteredRatio[count].body==null?'Not Available':filteredRatio[count].body, style: TextStyle(
+                                              Text(filteredRatio[count].body==null||filteredRatio[count].body=='null'?'Not Available':filteredRatio[count].body, style: TextStyle(
                                                 fontSize: 16.0,
                                                 fontFamily: 'Monseratti',
 
@@ -372,7 +372,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10,),
-                                Text(filteredsummary[index].casesCited==null?'Not Available': filteredsummary[index].casesCited , textAlign: TextAlign.left, style: TextStyle(
+                                Text(filteredsummary[index].casesCited==null||filteredsummary[index].casesCited=='null'?'Not Available': filteredsummary[index].casesCited , textAlign: TextAlign.left, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
@@ -387,7 +387,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10,),
-                                Text(filteredsummary[index].statusCited==null?'Not Available': filteredsummary[index].statusCited , textAlign: TextAlign.left, style: TextStyle(
+                                Text(filteredsummary[index].statusCited==null||filteredsummary[index].statusCited=='null'?'Not Available': filteredsummary[index].statusCited , textAlign: TextAlign.left, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
