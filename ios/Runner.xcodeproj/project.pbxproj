@@ -325,7 +325,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.legalpedia.legalpedia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.legalpedia.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
