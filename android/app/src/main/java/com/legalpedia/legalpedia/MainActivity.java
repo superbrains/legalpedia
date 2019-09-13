@@ -1,4 +1,4 @@
-package com.legalpedia.legalpedia;
+package com.legalpedia.mobile;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
