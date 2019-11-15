@@ -141,7 +141,7 @@ Future<bool> dialog(str){
           TextField(
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(10.0),
-                hintText: 'Search Laws...'
+                hintText: 'Search by Title or Year...'
             ),
             onChanged: (string){
 
@@ -184,7 +184,7 @@ Future<bool> dialog(str){
 
 
                             ),),
-                            SizedBox(height: 15.0),
+                          /*  SizedBox(height: 15.0),
 
                             Text(getDate(filteredlaws[index].lawDate)  , style: TextStyle(
                                 fontSize: 12.0,
@@ -193,7 +193,7 @@ Future<bool> dialog(str){
                                 color: Colors.grey
 
 
-                            ),),
+                            ),),*/
 
                           ],
                         ),

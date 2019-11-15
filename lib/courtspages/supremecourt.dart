@@ -39,6 +39,7 @@ class _SupremeCourt extends State<SupremeCourt>{
 
       summary2 = summary.where((u)=>
       (u.court.toLowerCase().contains('In the Supreme Court of Nigeria'.toLowerCase()))).toList();
+      summary2.sort((a, b) => a.id.compareTo(b.id));
 
       filteredsummary =summary2;
     });
@@ -64,7 +65,7 @@ String getDate(str){
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+   
     return new Scaffold(
 
         body:

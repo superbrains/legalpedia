@@ -64,6 +64,20 @@ String getTitle(str){
 
 }
 
+String getCourt(str){
+      filteredsummary = globals.summary.where((u)=>
+      (u.suitNo.toLowerCase().contains(str.toLowerCase()))).toList();
+     
+      if(filteredsummary.length>0){
+         return filteredsummary[0].court;
+      }else{
+         return 'Not Available';
+      }
+     
+
+}
+
+
   String getDate(str){
     
      filteredsummary = globals.summary.where((u)=>
@@ -173,29 +187,31 @@ appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
                                 color: Colors.green
 
                             ),),
-                             SizedBox(height: 10.0),
-                              Text('----------------------------------------------------'),
-                              SizedBox(height: 10.0),
-                               Text('Judgement Title:', style: TextStyle(
-                                fontSize: 16.0,
-                                fontFamily: 'Monseratti',
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold
-
-                            ),),
-                             SizedBox(height: 5.0),
+                           
+                             SizedBox(height: 15.0),
                             Text( getTitle(filteredRatio[index].suitNo) ==null ||  getTitle(filteredRatio[index].suitNo).toString().toUpperCase()=='NIL|'? 'Not available': getTitle(filteredRatio[index].suitNo), style: TextStyle(
                                 fontSize: 16.0,
                                 fontFamily: 'Monseratti',
                                
                             ),),
                               SizedBox(height: 10.0),
-                            Text(getDate(filteredRatio[index].suitNo)==null ||  getDate(filteredRatio[index].suitNo).toString().toUpperCase()=='NIL|'? 'Not available': getDate(filteredRatio[index].suitNo), style: TextStyle(
+                             
+                                Text(getCourt(filteredRatio[index].suitNo)==null ||  getCourt(filteredRatio[index].suitNo).toString().toUpperCase()=='NIL|'? 'Not available': getCourt(filteredRatio[index].suitNo), style: TextStyle(
                                 fontSize: 15.0,
                                 fontFamily: 'Monseratti',
                                 color: Colors.red
 
-                            ),),
+                                ),),
+                                 SizedBox(height: 10),
+                                Text(getDate(filteredRatio[index].suitNo)==null ||  getDate(filteredRatio[index].suitNo).toString().toUpperCase()=='NIL|'? 'Not available': getDate(filteredRatio[index].suitNo), style: TextStyle(
+                                fontSize: 15.0,
+                                fontFamily: 'Monseratti',
+                                color: Colors.green
+
+                                ),),
+
+                            
+                            
                           ],
                         ),
                       ),

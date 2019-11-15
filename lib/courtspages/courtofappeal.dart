@@ -37,7 +37,8 @@ class _CourtofAppeal extends State<CourtofAppeal>{
 
          summary2 = summary.where((u)=>
          (u.court.toLowerCase().contains('In the Court of Appeal'.toLowerCase()))).toList();
-
+           summary2.sort((a, b) => a.id.compareTo(b.id));
+           
          filteredsummary = summary2;
        });
 

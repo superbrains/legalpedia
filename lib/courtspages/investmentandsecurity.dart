@@ -39,7 +39,7 @@ class _InvestmentCourt extends State<InvestmentCourt>{
 
       summary2 = summary.where((u)=>
       (u.court.toLowerCase().contains('In the Investments and Securities Tribunal'.toLowerCase()))).toList();
-
+       summary2.sort((a, b) => a.id.compareTo(b.id));
       filteredsummary = summary2;
 
     });

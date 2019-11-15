@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:legalpedia/classes/relatedCaseClass.dart';
 import 'package:intl/intl.dart';
 import 'package:legalpedia/judgementbody.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:html/dom.dart' as dom;
 
 class JudgementDetail extends StatefulWidget{
 
@@ -185,13 +187,13 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 20.0),
 
-                                Text('NAME', textAlign: TextAlign.center, style: TextStyle(
+                                /*Text('NAME', textAlign: TextAlign.center, style: TextStyle(
                                     fontSize: 14.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green
 
-                                ),),
+                                ),),*/
                                 Text(filteredsummary[index].partiesA==null?'Not Available':filteredsummary[index].partiesA, textAlign: TextAlign.center, style : TextStyle(
                                   fontSize: 14.0,
                                   fontFamily: 'Monseratti',
@@ -209,13 +211,13 @@ class _JudgementDetail extends State<JudgementDetail>{
                                 ),),
                                 SizedBox(height: 20.0),
 
-                                Text('NAME', textAlign: TextAlign.center, style: TextStyle(
+                               /* Text('NAME', textAlign: TextAlign.center, style: TextStyle(
                                     fontSize: 14.0,
                                     fontFamily: 'Monseratti',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green
 
-                                ),),
+                                ),),*/
                                 Text(filteredsummary[index].partiesB==null?'Not Availble':filteredsummary[index].partiesB, textAlign: TextAlign.center, style : TextStyle(
                                   fontSize: 14.0,
                                   fontFamily: 'Monseratti',
@@ -327,12 +329,35 @@ class _JudgementDetail extends State<JudgementDetail>{
 
                                 ),),
                                 SizedBox(height: 10,),
-                                Text(filteredsummary[index].casesCited==null?'Not Available': filteredsummary[index].casesCited , textAlign: TextAlign.left, style: TextStyle(
+                                 Html(
+                              data: filteredsummary[index].casesCited,
+                              customTextAlign: (dom.Node node) {
+                                if (node is dom.Element) {
+                                  switch (node.localName) {
+                                    case "p":
+                                      return TextAlign.center;
+                                  }
+                                }
+                                return null;
+                              },
+                              customTextStyle: (dom.Node node, TextStyle baseStyle) {
+                                if (node is dom.Element) {
+                                  switch (node.localName) {
+                                    case "p":
+                                      return baseStyle.merge(TextStyle(height: 2, fontSize: 16, fontFamily: 'Monseratti'));
+                                  }
+                                }
+                                return baseStyle;
+                              },
+
+                             
+                            ),
+                              /*  Text(filteredsummary[index].casesCited==null?'Not Available': filteredsummary[index].casesCited , textAlign: TextAlign.left, style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: 'Monseratti',
 
 
-                                ),),
+                                ),),*/
                                 SizedBox(height: 30.0,),
                                 Text('STATUS SITED', textAlign: TextAlign.center, style: TextStyle(
                                     fontSize: 16.0,

@@ -37,7 +37,7 @@ class _IndustrialCourt extends State<IndustrialCourt>{
 
       summary2 = summary.where((u)=>
       (u.court.toLowerCase().contains('In the National Industrial Court of Nigeria'.toLowerCase()))).toList();
-
+       summary2.sort((a, b) => a.id.compareTo(b.id));
       filteredsummary = summary2;
     });
 
