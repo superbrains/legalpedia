@@ -7,4 +7,6 @@ List<RatioModel> ratios = List();
 List<SummaryModel> summary = List();
 String selectedFormContent='';
 String selectedFormTitle='';
+String selectedarticlesContent='';
+String selectedarticlesTitle='';
 String expiryDate='';

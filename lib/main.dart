@@ -114,7 +114,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       //Activation()
-      home: Activation(), // MyHomePage("Obi", "070707070"),// 
+      home: Activation(), //MyHomePage("Obi", "070707070"),//  //
     );
   }
 }

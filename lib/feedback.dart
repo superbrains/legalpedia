@@ -89,12 +89,11 @@ Future<bool> dialog(){
 
 ),
         body: 
-        ListView(
+       new SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: new Column(
           children: <Widget>[
-                  Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-           
+             
             Container(
               padding: EdgeInsets.only(top: 35.00, left: 20.0, right: 20.0),
               child: Column(
@@ -219,7 +218,7 @@ Future<bool> dialog(){
             )
           ],
         )
-          ],
+          
         )
   
     );
