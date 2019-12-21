@@ -25,8 +25,7 @@ import 'package:legalpedia/models/summarymodel.dart';
 import 'package:legalpedia/models/ratiosmodel.dart';
 import 'package:legalpedia/utils/database_helper.dart';
 import 'searchresult.dart';
-import 'package:legalpedia/dictionary.dart';
-import 'package:legalpedia/maxims.dart';
+
 
 
 void main() => runApp(MyApp());
@@ -114,7 +113,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       //Activation()
-      home:Activation(),// MyHomePage("Obi", "070707070"), 
+      home:Activation(),//MyHomePage("Obi", "070707070") 
     );
   }
 }
