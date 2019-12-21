@@ -80,11 +80,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
           ),),
 
-          actions: <Widget>[
-
-            new IconButton(icon: new Icon(Icons.share),onPressed: null,),
-            new IconButton(icon: new Icon(Icons.email),onPressed: null,),
-          ],
+         
           backgroundColor: Colors.red,
 
         ),

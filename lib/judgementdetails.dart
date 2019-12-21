@@ -117,7 +117,7 @@ class _JudgementDetail extends State<JudgementDetail>{
         appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
           elevation: 7.0,
           actionsIconTheme: new IconThemeData(color:  Colors.white),
-          title: Text('Judgements Details', style: TextStyle(
+          title: Text('Judgement Details', style: TextStyle(
               fontWeight:  FontWeight.bold,
               fontSize: 16.0,
               fontFamily: 'Monseratti',
@@ -125,11 +125,7 @@ class _JudgementDetail extends State<JudgementDetail>{
 
           ),),
 
-          actions: <Widget>[
-
-            new IconButton(icon: new Icon(Icons.share),onPressed: null,),
-            new IconButton(icon: new Icon(Icons.email),onPressed: null,),
-          ],
+        
           backgroundColor: Colors.red,
 
         ),

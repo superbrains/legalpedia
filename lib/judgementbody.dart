@@ -6,7 +6,7 @@ import 'package:progress_indicators/progress_indicators.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:share/share.dart';
 
 class JudegementBody extends StatefulWidget{
 
@@ -27,7 +27,8 @@ class _JudegementBody extends State<JudegementBody>{
  //
   final String id;
   JudgementFullBody filteredJudgement;
-
+    String jBody;
+    String jTitle;
   _JudegementBody(this.id);
 
   Future<bool> loader(){
@@ -56,10 +57,13 @@ class _JudegementBody extends State<JudegementBody>{
   }
 
 
-
+  void shareText(){
+    Share.share(jTitle +'\n\n' + jBody, subject: jTitle);
+  }
+  
   @override
   Widget build(BuildContext context) {
- 
+   
     return new Scaffold(
         appBar: new AppBar(iconTheme: new IconThemeData(color: Colors.white),
           elevation: 7.0,
@@ -75,7 +79,7 @@ class _JudegementBody extends State<JudegementBody>{
           actions: <Widget>[
 
 
-            new IconButton(icon: new Icon(Icons.email),onPressed: null,),
+            new IconButton(icon: new Icon(Icons.share),onPressed: shareText,),
           ],
           backgroundColor: Colors.red,
 
@@ -93,7 +97,8 @@ class _JudegementBody extends State<JudegementBody>{
                     return new Text('Error: ${snapshot.error}');
                   else
                     filteredJudgement = JudgementFullBody.fromJson(snapshot.data);
-
+                    jBody = filteredJudgement.result.judgementBody;
+                    jTitle  =filteredJudgement.result.title;
                   return Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[

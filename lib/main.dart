@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         'Judgment': (BuildContext context) => new Judgment(this.summary, this.ratios),
         'SubjectMatter': (BuildContext context) => new  SubjectMatter(),
-        'LatestJudgements': (BuildContext context) => new  LatestJudgements(),
+        'LatestJudgements': (BuildContext context) => new  LatestJudgements(this.summary, this.ratios),
         'LawsOfFederation': (BuildContext context) => new  LawsOfFederation(),
         'States': (BuildContext context) => new  States(),
         'Forms': (BuildContext context) => new  Forms(),
@@ -114,7 +114,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       //Activation()
-      home: Activation(), //MyHomePage("Obi", "070707070"),//  //
+      home:Activation(),// MyHomePage("Obi", "070707070"), 
     );
   }
 }
