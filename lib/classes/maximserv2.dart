@@ -5,7 +5,7 @@ import 'package:legalpedia/classes/maximclass.dart';
 
 class Services{
 
-  static const String url =   'http://35.231.129.160/api/services/app/dictionary/getall';
+  static const String url =   'https://resources.legalpediaresources.com/api/services/app/dictionary/getall';
   static Future<List<MaximList>> getMaxims() async{
 
     try{

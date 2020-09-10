@@ -5,23 +5,24 @@ import 'package:legalpedia/classes/summaryclass.dart';
 
 class SummaryUpdateService{
 
-  static const String url =   'http://35.231.129.160/api/services/app/updates/summariesformobile';
+  static const String url =   'https://resources.legalpediaresources.com/api/services/app/updates/summariesformobile';
   static Future<List<SummaryList>> getSummary() async{
 
     try{
       final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': '2018-01-01 04:30:35' ,'MaxCount': 500, 'SkipCount': 0}));
       if(response.statusCode==200){
         List<SummaryList> list = parse(response.body);
-     
+       // print('Response Returned');
+       // print(response.body);
         return list;
       }else {
-       
+        // print('error1');
         throw Exception("Error");
        
       }
     }
     catch(e){
-    
+      // print(e.toString());
       throw Exception(e.toString());
     }
   }

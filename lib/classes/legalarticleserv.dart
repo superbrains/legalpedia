@@ -5,7 +5,7 @@ import 'package:legalpedia/classes/legalarticleclass.dart';
 
 class Services{
 
-  static const String url =   'http://35.231.129.160/api/services/app/articles/Filter';
+  static const String url =   'https://resources.legalpediaresources.com/api/services/app/articles/Filter';
   static Future<List<LegalArticlesClass>> getArticles() async{
 
     try{

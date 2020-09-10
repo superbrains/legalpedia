@@ -5,7 +5,7 @@ import 'package:legalpedia/classes/relatedCaseClass.dart';
 
 class Services{
 
-  static const String url =   'http://35.231.129.160/api/services/app/summaries/getall';
+  static const String url =   'https://resources.legalpediaresources.com/api/services/app/summaries/getall';
   static Future<List<RelatedCaseList>> getSummary(int principleId) async{
 
     try{

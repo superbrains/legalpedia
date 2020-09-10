@@ -42,7 +42,7 @@ class _JudegementBody extends State<JudegementBody>{
   Future<String> getDemoResponse() async{
     String url;
    
-      url=   'http://35.231.129.160/api/services/app/summaries/details';
+      url=   'https://resources.legalpediaresources.com/api/services/app/summaries/details';
    
 
 

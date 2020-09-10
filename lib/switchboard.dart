@@ -132,6 +132,13 @@ class _MySwitchboardState extends State<MySwitchboard> {
                 summaryupdate = summaryfromServer;
                 filteredsummaryupdate = summaryupdate;
                //Update Local Database
+               var updatecnt;
+               updatecnt = filteredsummaryupdate.length-1;
+              
+                  for( var i = 0 ; i <= updatecnt; i++ ) { 
+                    //Implement Update Here
+                    print(filteredsummaryupdate[i].title);
+                  }
 
                
                 Navigator.pop(context);

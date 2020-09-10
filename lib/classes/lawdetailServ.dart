@@ -5,7 +5,7 @@ import 'package:legalpedia/classes/lawdetailClassTwo.dart';
 
 class Services{
 
-  static const String url =   'http://35.231.129.160/api/services/app/lawsoffederation/detail';
+  static const String url =   'https://resources.legalpediaresources.com/api/services/app/lawsoffederation/detail';
   static Future<List<LawDetailList>> getLawDetail(int id) async{
 
     try{

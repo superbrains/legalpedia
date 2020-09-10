@@ -37,7 +37,7 @@ class _LawofFederationDetail extends State<LawofFederationDetail>{
   }
 
   Future<String> getDemoResponse() async{
-    String url =   'http://35.231.129.160/api/services/app/lawsoffederation/detail';
+    String url =   'https://resources.legalpediaresources.com/api/services/app/lawsoffederation/detail';
 
     final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'id': id}));
     return response.body;

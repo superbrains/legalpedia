@@ -43,9 +43,9 @@ class _Rules extends State<Rules>{
   Future<String> getDemoResponse() async{
     String url;
     if(ruleType=='States'){
-      url=   'http://35.231.129.160/api/services/app/rulesofcourt/State';
+      url=   'https://resources.legalpediaresources.com/api/services/app/rulesofcourt/State';
     }else{
-      url=   'http://35.231.129.160/api/services/app/rulesofcourt/other';
+      url=   'https://resources.legalpediaresources.com/api/services/app/rulesofcourt/other';
     }
 
 

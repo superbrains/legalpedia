@@ -5,7 +5,7 @@ import 'package:legalpedia/classes/formsprecedenceclass.dart';
 
 class Services{
 
-  static const String url =   'http://35.231.129.160/api/services/app/formsprecedence/getall';
+  static const String url =   'https://resources.legalpediaresources.com/api/services/app/formsprecedence/getall';
   static Future<List<FormsPrecedenceClass>> getForeign() async{
 
     try{

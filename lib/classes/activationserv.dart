@@ -5,7 +5,7 @@ import 'dart:convert';
 class Services{
 
   static Future<String> getOTP(String phone, String mac) async{
-    String url =  'http://35.231.129.160/api/services/app/license/getotp?phoneNumber=$phone&systemId=$mac';
+    String url =  'https://resources.legalpediaresources.com/api/services/app/license/getotp?phoneNumber=$phone&systemId=$mac';
 
     try{
       final response = await http.post(url,  headers: {'content-type' : 'application/json'});
@@ -23,7 +23,7 @@ class Services{
   }
 //Activate Phone
   static Future<String> activatePhone(String otp, String mac) async{
-    String url =  'http://35.231.129.160/api/services/app/license/activate?code=$otp&systemId=$mac';
+    String url =  'https://resources.legalpediaresources.com/api/services/app/license/activate?code=$otp&systemId=$mac';
 
     try{
       final response = await http.post(url,  headers: {'content-type' : 'application/json'});
@@ -40,7 +40,7 @@ class Services{
   }
 
   static Future<String> getinfo(String result) async{
-    String url =  'http://35.231.129.160/api/services/app/license/getinfo';
+    String url =  'https://resources.legalpediaresources.com/api/services/app/license/getinfo';
 
     try{
       final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'key': result}));
