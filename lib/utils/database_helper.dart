@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
+import 'package:legalpedia/classes/summaryclass.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
-
+import 'package:legalpedia/globals.dart' as globals;
 
 import 'package:legalpedia/models/areamodel.dart';
 import 'package:legalpedia/models/coramsmodel.dart';
@@ -20,6 +21,7 @@ class DatabaseHelper {
   String summaryTable = 'tblsummaries';
 
   String colId = "id";
+String colsuitno = "suitNo";
 
   DatabaseHelper._createInstance();
 
@@ -58,6 +60,7 @@ class DatabaseHelper {
 // Create the writable database file from the bundled demo database file:
 
     var db = await openDatabase(dbPath);
+
     print("Path is $dbPath");
     return db;
   }
@@ -106,11 +109,49 @@ class DatabaseHelper {
     return result;
   }*/
 
-  Future<int> insertSummary(SummaryModel summary) async {
+    Future<String> insertSummary( List<SummaryList> summary) async {
     Database db = await this.database;
-    var result = await db.insert(summaryTable, summary.toMap());
+    var result;
+    
+                  var updatecnt;
+                 updatecnt = summary.length-1;
 
-    return result;
+                  var cnt =globals.summary.length + 3;
+
+
+                  for( var i = 0 ; i <= updatecnt; i++ ) { 
+                      cnt++;
+                      //Implement Update Here
+                   SummaryModel summaryModel = new SummaryModel.withId(cnt, summary[i].suitNo, 
+                   summary[i].title,summary[i].summaryOfFacts, summary[i].held, 
+                   summary[i].issues, summary[i].casesCited, summary[i].statusCited,
+                   summary[i].legalpediaCitation, summary[i].judgementDate, summary[i].otherCitations,
+                   summary[i].court, summary[i].category, summary[i].counsels,
+                   summary[i].holdenAt, summary[i].partyAType, summary[i].partyBType,
+                   summary[i].partiesA, summary[i].partiesB);
+                    
+                  if(summary.where((element) => element.suitNo==summary[i].suitNo).length>0){
+                      // result  = await db.update(summaryTable, summaryModel.toMap());
+
+                      var result = await db.update(summaryTable, summaryModel.toMap(),
+                      where: '$colsuitno = ?', whereArgs: [summaryModel.suitNo]);
+
+                      print("Updated");
+
+                  }else{
+
+                      globals.summary.add(summaryModel);
+                      
+                  result  = await db.insert(summaryTable, summaryModel.toMap());
+                  print("inserted");
+                  }
+                   
+
+                 
+
+                  }
+
+    return result.toString();
   }
 
   Future<int> insertRatio(RatioModel ratio) async {
@@ -137,7 +178,7 @@ class DatabaseHelper {
   Future<int> updateSummary(SummaryModel summary) async {
     Database db = await this.database;
     var result = await db.update(summaryTable, summary.toMap(),
-        where: '$colId = ?', whereArgs: [summary.id]);
+        where: '$colsuitno = ?', whereArgs: [summary.suitNo]);
 
     return result;
   }

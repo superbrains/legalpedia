@@ -2,31 +2,69 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:legalpedia/classes/summaryclass.dart';
+import 'package:legalpedia/globals.dart' as globals;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SummaryUpdateService{
 
   static const String url =   'https://resources.legalpediaresources.com/api/services/app/updates/summariesformobile';
   static Future<List<SummaryList>> getSummary() async{
     String curdate;
-    curdate = DateTime.now().toString();
-    
+
+
+    // DateTime.now().toString();
+     SharedPreferences.getInstance().then((ss){
+           curdate =ss.getString('LastUpdate') ?? 'null';
+    });
+    if(curdate=='null'){
+       curdate ="2018-01-01 08:37:28.059100";
+    }
+
     try{
-      final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': curdate ,'MaxCount': 500, 'SkipCount': 0}));
-      if(response.statusCode==200){
-        List<SummaryList> list = parse(response.body);
-       // print('Response Returned');
-       // print(response.body);
-        return list;
-      }else {
-        // print('error1');
-        throw Exception("Error");
-       
+      int count;
+      int skip = 0;
+      List<SummaryList> list ;
+
+      do { 
+      
+        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': curdate ,'MaxCount': 500, 'SkipCount': skip}));
+        if(response.statusCode==200){
+
+        if(list==null){
+           list = parse(response.body);
+        }else{
+          list.addAll(parse(response.body));
+        }
+
+        count = list.length;
+        
+          }
+
+        skip = skip + 500; 
+        globals.lastUpdate = getdate(response.body);
+
       }
+     
+      while(count>=500);
+      
+
+        
+       return list;
+
     }
     catch(e){
       // print(e.toString());
       throw Exception(e.toString());
     }
+  }
+
+ static String getdate(String responseBody){
+    Map data;
+    data = json.decode(responseBody);
+
+    final parsed = data["result"]["maxid"].toString();
+    return parsed;
+
   }
 
   static List<SummaryList> parse(String responseBody){

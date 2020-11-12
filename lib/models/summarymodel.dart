@@ -80,6 +80,11 @@ class SummaryModel {
   String get partiesA => _partiesA;
   String get partiesB => _partiesB;
 
+
+ set id(int newId) {
+    this._id = newId;
+  }
+
   set suitNo(String newsuitNo) {
     this._suitNo = newsuitNo;
   }

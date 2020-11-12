@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:legalpedia/utils/database_helper.dart';
 import 'classes/summaryclass.dart';
 import 'classes/summaryupdateserv.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:legalpedia/globals.dart' as globals;
+import 'models/summarymodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MySwitchboard extends StatefulWidget {
   @override
   _MySwitchboardState createState() => _MySwitchboardState();
 }
+
+  DatabaseHelper databaseHelper = DatabaseHelper();
 
 class _MySwitchboardState extends State<MySwitchboard> {
   List<SummaryList> summaryupdate = List();
@@ -127,30 +134,48 @@ class _MySwitchboardState extends State<MySwitchboard> {
             // if (res=="Connected"){
 
             loader();
-            SummaryUpdateService.getSummary().then((summaryfromServer) {
+            int skip = 500;
+
+          
+                 SummaryUpdateService.getSummary().then((summaryfromServer) {
               setState(() {
                 summaryupdate = summaryfromServer;
                 filteredsummaryupdate = summaryupdate;
-               //Update Local Database
-               var updatecnt;
-               updatecnt = filteredsummaryupdate.length-1;
+                 
               
-                  for( var i = 0 ; i <= updatecnt; i++ ) { 
-                    //Implement Update Here
-                    print(filteredsummaryupdate[i].title);
-                    
-
-                  }
-
+                   insertsummary(filteredsummaryupdate).then((value) => (){
+                     SharedPreferences.getInstance().then((ss){
+                ss.setString('LastUpdate', globals.lastUpdate);
                
-                Navigator.pop(context);
               });
+                         Navigator.pop(context);
+
+                   });
+                
+                    
+                  
+             //  
+              });
+
+
+           
+            
             });
           });
+  
+         
         }),
       ],
     );
   }
+
+Future<String> insertsummary( List<SummaryList> summary) async{
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database) {
+    Future<String> result = databaseHelper.insertSummary(summary);
+    return result;
+  });
+}
 
   _buildCard(String title, String imgPath, Function onTap) {
     return InkWell(

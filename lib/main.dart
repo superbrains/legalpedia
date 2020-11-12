@@ -2,6 +2,7 @@ import 'dart:ui' as prefix1;
 import 'package:legalpedia/about.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:legalpedia/forgotpass.dart';
 import 'package:legalpedia/switchboard.dart';
 import 'package:legalpedia/judgements.dart';
 import 'package:legalpedia/subjectmatter.dart';
@@ -113,7 +114,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       //Activation()
-      home:Activation(),
+      home:MyHomePage("Obi", "0808544"),
     );
   }
 }
