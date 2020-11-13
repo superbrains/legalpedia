@@ -62,7 +62,7 @@ class SummaryUpdateService{
     Map data;
     data = json.decode(responseBody);
 
-    final parsed = data["result"]["maxid"].toString();
+    final parsed = data["result"]["maxId"].toString();
     return parsed;
 
   }
