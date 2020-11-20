@@ -136,14 +136,14 @@ String colsuitno = "suitNo";
                       var result = await db.update(summaryTable, summaryModel.toMap(),
                       where: '$colsuitno = ?', whereArgs: [summaryModel.suitNo]);
 
-                      print("Updated");
+                      print("Updated " + i.toString());
 
                   }else{
 
                       globals.summary.add(summaryModel);
                       
                   result  = await db.insert(summaryTable, summaryModel.toMap());
-                  print("inserted");
+                  print("inserted " + i.toString() );
                   }
                    
 

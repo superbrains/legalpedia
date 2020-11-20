@@ -134,36 +134,29 @@ class _MySwitchboardState extends State<MySwitchboard> {
             // if (res=="Connected"){
 
             loader();
-            int skip = 500;
+            int skip = 50;
 
-          
                  SummaryUpdateService.getSummary().then((summaryfromServer) {
-              setState(() {
+              setState(() async{
                 summaryupdate = summaryfromServer;
                 filteredsummaryupdate = summaryupdate;
                  
               
-                   insertsummary(filteredsummaryupdate).then((value) => (){
-                     SharedPreferences.getInstance().then((ss){
+              var result = await  insertsummary(filteredsummaryupdate);
+                Navigator.pop(context);
+                  SharedPreferences.getInstance().then((ss){
                 ss.setString('LastUpdate', globals.lastUpdate);
                
               });
-                         Navigator.pop(context);
-
-                   });
                 
                     
                   
              //  
               });
 
-
-           
-            
             });
           });
   
-         
         }),
       ],
     );

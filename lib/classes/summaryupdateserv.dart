@@ -11,12 +11,12 @@ class SummaryUpdateService{
   static Future<List<SummaryList>> getSummary() async{
     String curdate;
 
-
     // DateTime.now().toString();
      SharedPreferences.getInstance().then((ss){
            curdate =ss.getString('LastUpdate') ?? 'null';
     });
-    if(curdate=='null'){
+
+    if(curdate=='null' || curdate==null){
        curdate ="2018-01-01 08:37:28.059100";
     }
 
@@ -27,34 +27,37 @@ class SummaryUpdateService{
 
       do { 
       
-        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': curdate ,'MaxCount': 500, 'SkipCount': skip}));
+        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': curdate ,'MaxCount': 50, 'SkipCount': skip}));
         if(response.statusCode==200){
-
+          
         if(list==null){
            list = parse(response.body);
+           globals.lastUpdate = getdate(response.body);
+           count = list.length;
         }else{
           list.addAll(parse(response.body));
+          globals.lastUpdate = getdate(response.body);
+          count = list.length;
         }
 
-        count = list.length;
-        
+          }else{
+             count = 0;
           }
 
-        skip = skip + 500; 
-        globals.lastUpdate = getdate(response.body);
+        skip = skip + 50; 
+     
 
       }
      
       while(count>=500);
-      
-
-        
+              
        return list;
 
     }
+
     catch(e){
       // print(e.toString());
-      throw Exception(e.toString());
+     // throw Exception(e.toString());
     }
   }
 
