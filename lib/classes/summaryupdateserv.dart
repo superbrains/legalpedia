@@ -49,7 +49,7 @@ class SummaryUpdateService{
 
       }
      
-      while(count>=500);
+      while(count>=50);
               
        return list;
 

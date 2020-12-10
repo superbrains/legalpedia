@@ -42,7 +42,7 @@ String colsuitno = "suitNo";
 
   Future<Database> initializeDatabase() async {
     //Get path of the directory for android and iOS.
-
+    
     // Construct the path to the app's writable database file:
     var dbDir = await getDatabasesPath();
     print("Directory is $dbDir");
