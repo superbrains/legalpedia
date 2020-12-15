@@ -116,7 +116,7 @@ String colsuitno = "suitNo";
                   var updatecnt;
                  updatecnt = summary.length-1;
 
-                  var cnt =globals.summary.length + 3;
+                  var cnt =globals.summary.length + 23456;
 
 
                   for( var i = 0 ; i <= updatecnt; i++ ) { 

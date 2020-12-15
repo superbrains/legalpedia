@@ -27,7 +27,7 @@ class SummaryUpdateService{
 
       do { 
       
-        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': '${curdate}' ,'MaxCount': 500, 'SkipCount': '${skip}'}));
+        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': '2018-01-01 08:37:28.059100' ,'MaxCount': 500, 'SkipCount': '${skip}'}));
         if(response.statusCode==200){
           
         if(list==null){
@@ -46,7 +46,7 @@ class SummaryUpdateService{
              count = 0;
           }
 
-      //  skip = skip + 50; 
+      skip = skip + 500; 
      
       }
      
