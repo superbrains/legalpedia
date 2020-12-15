@@ -12,7 +12,7 @@ description: Legalpedia Mobile App
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
-version: 7.0.2+4
+version: 8.0.2+4
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

@@ -27,29 +27,30 @@ class SummaryUpdateService{
 
       do { 
       
-        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': curdate ,'MaxCount': 50, 'SkipCount': skip}));
+        final response = await http.post(url,  headers: {'content-type' : 'application/json'}, body: jsonEncode({'Version': '${curdate}' ,'MaxCount': 500, 'SkipCount': '${skip}'}));
         if(response.statusCode==200){
           
         if(list==null){
            list = parse(response.body);
            globals.lastUpdate = getdate(response.body);
+           curdate = globals.lastUpdate;
            count = list.length;
         }else{
           list.addAll(parse(response.body));
           globals.lastUpdate = getdate(response.body);
           count = list.length;
+           curdate = globals.lastUpdate;
         }
 
           }else{
              count = 0;
           }
 
-        skip = skip + 50; 
+      //  skip = skip + 50; 
      
-
       }
      
-      while(count>=50);
+      while(count % 500  == 0);
               
        return list;
 

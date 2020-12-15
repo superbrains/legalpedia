@@ -11,9 +11,9 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '8'
+def flutterhttps://resources.legalpediaresources.com = localProperties.getProperty('flutter.https://resources.legalpediaresources.com')
+if (flutterhttps://resources.legalpediaresources.com == null) {
+    flutterhttps://resources.legalpediaresources.com = '8'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
@@ -36,7 +36,7 @@ android {
         applicationId "com.legalpedia.mobile"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode flutterVersionCode.toInteger()
+        https://resources.legalpediaresources.com flutterhttps://resources.legalpediaresources.com.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

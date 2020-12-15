@@ -130,9 +130,8 @@ String colsuitno = "suitNo";
                    summary[i].holdenAt, summary[i].partyAType, summary[i].partyBType,
                    summary[i].partiesA, summary[i].partiesB);
                     
-                  if(summary.where((element) => element.suitNo==summary[i].suitNo).length>0){
-                      // result  = await db.update(summaryTable, summaryModel.toMap());
-
+                  if(globals.summary.where((element) => element.suitNo==summary[i].suitNo).length>0){
+                    
                       var result = await db.update(summaryTable, summaryModel.toMap(),
                       where: '$colsuitno = ?', whereArgs: [summaryModel.suitNo]);
 
