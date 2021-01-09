@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:flutter/services.dart';
 import 'package:legalpedia/classes/summaryclass.dart';
 import 'package:sqflite/sqflite.dart';
@@ -117,7 +119,20 @@ String colsuitno = "suitNo";
                  updatecnt = summary.length-1;
 
                   var cnt =globals.summary.length + 23456;
+                  int corCount;
+                  Future<int> fuCorCount = getCoramcount().then((value) =>(
+                  corCount =value
 
+                  ));
+                  
+                  corCount = corCount + 23456;
+
+                  int ratioCount;
+                  Future<int> fuRatioCount = getRatiocount().then((value) =>(
+                  ratioCount =value
+
+                  ));
+                  ratioCount = ratioCount + 23456;
 
                   for( var i = 0 ; i <= updatecnt; i++ ) { 
                       cnt++;
@@ -130,24 +145,49 @@ String colsuitno = "suitNo";
                    summary[i].holdenAt, summary[i].partyAType, summary[i].partyBType,
                    summary[i].partiesA, summary[i].partiesB);
                     
+                     List<CoramModel> coramModels = new List<CoramModel>();
+
+                     summary[i].corams.forEach((item) {
+                        CoramModel coramModel = new CoramModel.withId(corCount, summary[i].suitNo, item);
+                        coramModels.add(coramModel);
+
+                     });
+                   
+                    List<RatioModel> ratioModels = new List<RatioModel>();
+
+                     summary[i].ratios.forEach((item) {
+                        RatioModel ratioModel = new RatioModel(ratioCount, summary[i].suitNo, item.heading, item.coram, item.body, item.summary);
+                        ratioModels.add(ratioModel);
+
+                     });
+
+
                   if(globals.summary.where((element) => element.suitNo==summary[i].suitNo).length>0){
                     
                       var result = await db.update(summaryTable, summaryModel.toMap(),
                       where: '$colsuitno = ?', whereArgs: [summaryModel.suitNo]);
 
-                      print("Updated " + i.toString());
+                                           print("Updated " + i.toString());
 
                   }else{
 
                       globals.summary.add(summaryModel);
                       
                   result  = await db.insert(summaryTable, summaryModel.toMap());
+                 
+                  coramModels.forEach((element) async{
+                     result  = await db.insert(coramsTable, element.toMap());
+                  });
+
+                  ratioModels.forEach((element) async{
+                     result  = await db.insert(coramsTable, element.toMap());
+                  });
+
+
                   print("inserted " + i.toString() );
+
                   }
                    
-
-                 
-
                   }
 
     return result.toString();

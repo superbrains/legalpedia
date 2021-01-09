@@ -15,6 +15,7 @@ class RatioModel {
     this._summary,
   );
 
+
   int get id => _id;
   String get suitNo => _suitNo;
   String get heading => _heading;
