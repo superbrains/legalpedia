@@ -150,6 +150,7 @@ String colsuitno = "suitNo";
                      summary[i].corams.forEach((item) {
                         CoramModel coramModel = new CoramModel.withId(corCount, summary[i].suitNo, item);
                         coramModels.add(coramModel);
+                        corCount++;
 
                      });
                    
@@ -158,7 +159,7 @@ String colsuitno = "suitNo";
                      summary[i].ratios.forEach((item) {
                         RatioModel ratioModel = new RatioModel(ratioCount, summary[i].suitNo, item.heading, item.coram, item.body, item.summary);
                         ratioModels.add(ratioModel);
-
+                        ratioCount++;
                      });
 
 
