@@ -1,4 +1,3 @@
-import 'dart:js_util';
 
 import 'package:flutter/services.dart';
 import 'package:legalpedia/classes/summaryclass.dart';
